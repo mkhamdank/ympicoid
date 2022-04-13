@@ -190,5 +190,9 @@ Route::get('/cms','VendorController@indexCms');
 Route::post('post/cms', 'VendorController@inputCms');
 
 //RAW MATERIAL
+Route::get('po_confirmation','RawMaterialController@indexPoConfirmation');
+Route::get('fetch/po','RawMaterialController@fetchPo');
+Route::post('input/po_confirmation', 'RawMaterialController@inputPoConfirmation');
+Route::get('send/po_notification/{po_number}', 'RawMaterialController@sendPoNotification');
 
-
+//END RAW MATERIAL

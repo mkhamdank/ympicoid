@@ -224,7 +224,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="contact-form">
-                    <form class="validate-form" id="stocktaking_survey_form" style="display: none;">
+                    <div id="stocktaking_survey_form" style="display: none;">
                         <div style="width: 100%;">
                             {{ csrf_field() }}
                             <div class="col-xs-12 col-md-12 col-lg-12" style="padding:0">
@@ -297,28 +297,41 @@
                                 </table>
                             </div>
                         </div>
-                    </form>
+                    </div>
 
-                    <form class="validate-form" style="padding: 0px 25px 58px 25px; display: none" id="stocktaking_survey_finish">
+                    <div style="padding: 0px 25px 58px 25px; display: none" id="stocktaking_survey_finish">
                         <div style="width: 100%;">
-                            <div class="col-xs-12 col-md-12 col-lg-12">
+                            <div class="col-xs-12 col-md-12 col-lg-12" style="margin-top: 5%;">
                                 <center style="font-size:16px">
-                                    Terimakasih anda telah mengisi survey stocktaking pada <span style="color: red"><div id="stocktaking_survey_time"></div></span>
+                                    Terimakasih <span class="name"></span>,<br>
+                                    Anda telah mengisi survey stocktaking pada <span style="color: red" id="stocktaking_survey_time"></span>
                                 </center>
                             </div>
                         </div>
-                    </form>
+                    </div>
 
-                    <form class="validate-form" style="padding: 0px 25px 58px 25px; display: none" id="stocktaking_survey_not_yet">
+                    <div style="padding: 0px 25px 58px 25px; display: none" id="stocktaking_survey_not_yet">
                         <div style="width: 100%;">
-                            <div class="col-xs-12 col-md-12 col-lg-12">
+                            <div class="col-xs-12 col-md-12 col-lg-12" style="margin-top: 5%;">
                                 <center style="font-size:16px">
-                                    Hai <span id="name"></span><br>
+                                    Hai <span class="name"></span>,<br>
                                     Survey dapat diisi mulai <span style="color: red;" id="survey_date"></span>
                                 </center>
                             </div>
                         </div>
-                    </form>
+                    </div>
+
+                    <div style="padding: 0px 25px 58px 25px; display: none" id="stocktaking_survey_not_authorized">
+                        <div style="width: 100%;">
+                            <div class="col-xs-12 col-md-12 col-lg-12" style="margin-top: 5%;">
+                                <center style="font-size:16px">
+                                    Hai <span class="name"></span>,<br>
+                                    Mohon maaf survey hanya dapat diisi oleh member stocktaking
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -348,34 +361,73 @@
         $.get('{{url("fetch/check_survey_stocktaking")}}', data, function(result, status, xhr){
             if (result.status) {
 
-                $('#name').text(result.employee.name);
+                $('.name').text(result.employee.name);
                 $('#survey_date').text(result.survey_date);
 
+                var position = [
+                'Operator Contract',
+                'Operator',
+                'Senior Operator',
+                'Sub Leader',
+                'Leader'
+                ];
 
-                var date = result.date;
+                var section = [
+                'Pianica Process Section',
+                'Recorder Proces',
+                'Body Parts Process Section',
+                'Assembly CL . Tanpo . Case Process Section',
+                'Assembly FL Process Section',
+                'Assembly Sax Process Section',
+                'NC Process Section',
+                'Press and Sanding Process Section',
+                'Body Buffing-Barrel Process Section',
+                'Buffing Key Process Section',
+                'SurfaceTreatment Section',
+                'Handatsuke . Support Process Section',
+                'Koshuha Solder Process Section',
+                'Warehouse Section'
+                ];
 
-                if (date >= 1 && date <= 31) {
+                var department = [
+                'Management Information System Department',
+                'Purchasing Control Department'
+                ];
 
-                    if(result.cek_stocktaking_survey.length > 0) {
-                        $('#stocktaking_survey_form').hide();
-                        $('#stocktaking_survey_finish').show();
-                        $("#stocktaking_survey_not_yet").hide();
+                if( ( position.includes(result.employee.position) && section.includes(result.employee.section) ) || department.includes(result.employee.department) ){
+                    var date = parseInt(result.date);
 
-                        $('#stocktaking_survey_time').html(result.cek_stocktaking_survey[0].created_at);
+                    if (date >= 20 && date <= 31) {
+
+                        if(result.cek_stocktaking_survey.length > 0) {
+                            $('#stocktaking_survey_form').hide();
+                            $('#stocktaking_survey_finish').show();
+                            $("#stocktaking_survey_not_yet").hide();
+                            $("#stocktaking_survey_not_authorized").hide();
+                            $('#stocktaking_survey_time').html(result.cek_stocktaking_survey[0].created_at);
+
+                        }else{
+                            $('#stocktaking_survey_form').show();
+                            $('#stocktaking_survey_finish').hide();
+                            $("#stocktaking_survey_not_yet").hide();
+                            $("#stocktaking_survey_not_authorized").hide();
+                            hideAll();
+
+                        }
+
                     }else{
-                        $('#stocktaking_survey_form').show();
-                        $('#stocktaking_survey_finish').hide();
-                        $("#stocktaking_survey_not_yet").hide();
+                        $("#stocktaking_survey_form").hide();
+                        $("#stocktaking_survey_finish").hide();
+                        $("#stocktaking_survey_not_yet").show();
+                        $("#stocktaking_survey_not_authorized").hide();
 
                     }
-
-                    hideAll();
 
                 }else{
                     $("#stocktaking_survey_form").hide();
                     $("#stocktaking_survey_finish").hide();
-                    $("#stocktaking_survey_not_yet").show();
-                    hideAll();
+                    $("#stocktaking_survey_not_yet").hide();
+                    $("#stocktaking_survey_not_authorized").show();
 
                 }
 
@@ -419,15 +471,13 @@
             count_question : count_question
         };
 
-        console.log(data);
-        return false;
-
         $.post('{{ url("input/survey_stocktaking") }}', data, function(result, status, xhr){
             if(result.status == true){    
                 $("#loading").hide();
                 $("#stocktaking_survey_form").hide();
                 $("#stocktaking_survey_finish").show();
                 $("#stocktaking_survey_not_yet").hide();
+                $("#stocktaking_survey_not_authorized").hide();
 
                 $('#stocktaking_survey_time').html(result.now);
 
