@@ -43,7 +43,7 @@
                             </a>
                         </li>
                         <li style="background-color:#fff">
-                            <a href="{{ url('survey_stocktaking') }}" 
+                            <a href="{{ url('index/survey_stocktaking') }}" 
                                 @if(isset($page) && $page == "Survey Stocktaking") class="active" @endif>
                                 <i class="fa fa-users"></i> Survey Stocktaking
                             </a>

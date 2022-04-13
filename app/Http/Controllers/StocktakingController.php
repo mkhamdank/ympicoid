@@ -27,7 +27,7 @@ class StocktakingController extends Controller {
 
 		return view('stocktaking.survey', array(
 			'question' => $question
-		));
+		))->with('page','Survey Stocktaking');
 		
 	}
 
