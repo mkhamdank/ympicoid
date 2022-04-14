@@ -130,6 +130,7 @@ body {
 
 .section.colored {
   background: #f2f2fe;
+  min-height: 85vh;
 }
 
 .hr {
@@ -847,7 +848,7 @@ parallax & home seperator
 --------------------------------------------- 
 */
 .mini {
-  min-height: 215px;
+  min-height: 85vh;
   overflow: hidden;
   position: relative;
   padding-top: 90px;
