@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-<section class="mini" id="dashboard">
+<section class="mini" id="dashboard" style="padding-bottom:0">
     <div class="mini-content">
         <div class="container">
             <div class="row">
@@ -14,49 +14,56 @@
 
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
-                    <a href="{{ url('laporan_kesehatan') }}"  class="mini-box">
+                    <a href="{{ url('laporan_kesehatan') }}"  class="mini-box" style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/laporan_kesehatan.png')}}" alt="" height="50"></i>
                         <strong style="font-size:12px">Laporan <br>Kesehatan</strong>
                         <!-- <span>Laporkan Kondisi Harian Kesehatan Anda Setiap Hari</span> -->
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
-                    <a href="{{ url('survey_covid') }}"  class="mini-box">
+                    <a href="{{ url('survey_covid') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/covid.png')}}" alt="" height="50"></i>
                         <strong style="font-size:12px">Survey <br>Covid-19</strong>
                         <!-- <span>Survey Penilaian Resiko Covid Diisi Setiap Akhir Libur</span> -->
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
-                    <a href="{{ url('vaksin') }}"  class="mini-box">
+                    <a href="{{ url('vaksin') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/vaksin.png')}}" alt="" height="50"></i>
                         <strong style="font-size:12px">Vaksinasi <br>Covid-19</strong>
                         <!-- <span>Daftar dan Update Data Vaksin Anda pada menu ini</span> -->
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
-                    <a href="{{ url('pkb') }}"  class="mini-box">
+                    <a href="{{ url('data_komunikasi') }}"  class="mini-box"  style="margin-bottom:20px">
+                        <i><img src="{{ asset('images/dashboard/communication.png')}}" alt="" height="50"></i>
+                        <strong style="font-size:12px">Data <br>Komunikasi</strong>
+                        <!-- <span>Media untuk mengumpulkan ketika terjadi suatu peristiwa emergency</span> -->
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
+                    <a href="{{ url('pkb') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/pkb.png')}}" alt="" height="50"></i>
                         <strong style="font-size:12px">Pernyataan <br>PKB</strong>
                         <!-- <span>Selalu Pahami Isi Buku PKB dan Laporkan disini</span> -->
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
-                    <a href="{{ url('kode_etik') }}"  class="mini-box">
+                    <a href="{{ url('kode_etik') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/kode_etik.png')}}" alt="" height="50"></i>
                         <strong style="font-size:12px">Kode Etik <br>Kepatuhan</strong>
                         <!-- <span>Post Test Mengenai Pemahaman COC (Code Of Conduct)</span> -->
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
-                    <a href="{{ url('index/survey_stocktaking') }}"  class="mini-box">
+                    <a href="{{ url('index/survey_stocktaking') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/stocktaking.png')}}" alt="" height="50"></i>
                         <strong style="font-size:12px">Survey <br>Stocktaking</strong>
                         <!-- <span>Seberapa Mengerti Anda Mengenai Stocktaking di YMPI</span> -->
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
-                    <a href="{{ url('emergency') }}"  class="mini-box">
+                    <a href="{{ url('emergency') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/emergency1.png')}}" alt="" height="50"></i>
                         <strong style="font-size:12px">Kuisioner <br>Emergency</strong>
                         <!-- <span>Media untuk mengumpulkan ketika terjadi suatu peristiwa emergency</span> -->

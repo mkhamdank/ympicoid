@@ -155,6 +155,10 @@ Route::get('emergency', 'MasterController@emergency');
 Route::get('post/emergency', 'MasterController@postEmergency');
 
 
+Route::get('data_komunikasi', 'MasterController@DataKomunikasi');
+Route::get('post/data_komunikasi', 'MasterController@postDataKomunikasi');
+
+
 Route::get('/home', [
 	'middleware' => 'permission', 
 	'nav' => 'Dashboard', 

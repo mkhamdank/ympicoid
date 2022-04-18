@@ -25,7 +25,12 @@
                                 <i class="fa fa-heartbeat"></i> Survey Covid
                             </a>
                         </li>
-
+                        <li style="background-color:#fff">
+                           <a href="{{ url('data_komunikasi') }}" 
+                                @if(isset($page) && $page == "Data Komunikasi") class="active" @endif>
+                                <i class="fa fa-phone"></i> Data Komunikasi
+                            </a>
+                        </li>
                         <li style="background-color:#fff">
                              <a href="{{ url('vaksin') }}" 
                                 @if(isset($page) && $page == "Vaksin") class="active" @endif>

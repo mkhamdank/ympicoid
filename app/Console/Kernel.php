@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\InvoiceCommand::class,
+        Commands\SyncSunfishMobile::class
     ];
 
     /**
@@ -25,10 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-    
         $schedule->command('email:visitor_confirmation')->weekdays()->dailyAt('07:00');
-        // $schedule->command('email:visitor_confirmation')->everyMinute();
-        // $schedule->command('email:confirmation_overtime')->weekdays()->dailyAt('06:55');
+        $schedule->command('sync:sunfish_mobile')->dailyAt('03:30');
     }
 
     /**

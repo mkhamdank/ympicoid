@@ -115,7 +115,16 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-
+        'sunfish' => [
+            'driver' => 'sqlsrv',
+            'host' => '10.109.52.9',
+            'port' => '1438',
+            'database' => 'dbSF_YAMAHAHRIS',
+            'username' => 'ympiview',
+            'password' => '?ympisf2020!',
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
 
     ],
 
