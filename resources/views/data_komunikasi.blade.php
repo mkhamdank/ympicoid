@@ -225,7 +225,7 @@
         <div class="row">
             <br>
             <div class="col-lg-12" style="margin-top:20px;">
-                <div class="center-heading">
+                <div class="center-heading" id="div_title">
                     <h2 class="section-title" style="background-color:#955ddf;color:white;margin-bottom: 0px;border-top-left-radius: 10px;border-top-right-radius: 10px;font-size: 15px">Data Komunikasi lebaran</h2>
                     <!-- <h3 class="section-title" style="background-color: white;font-size: 12px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;margin-bottom: 10px"><?= $empsync[0]->employee_id ?> - <?= $empsync[0]->name ?></h3> -->
                 </div>
@@ -354,7 +354,7 @@
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="contact-form">
-                                  <div class="row">
+                                  <div class="row" style="overflow-x: scroll;">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                       <fieldset>
                                         <table id="example1" class="table table-bordered table-hover">
@@ -365,6 +365,10 @@
                                                     <th>Dept</th>
                                                     <th>Nomor HP</th>
                                                     <th>Nomor Alternatif</th>
+                                                    <th>Kota Mudik</th>
+                                                    <th>Tanggal Berangkat</th>
+                                                    <th>Tanggal Kembali</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -375,6 +379,9 @@
                                                     <td>{{ $comm->department }}</td>
                                                     <td>{{ $comm->no_hp }}</td>
                                                     <td>{{ $comm->no_alternatif }}</td>
+                                                    <td>{{ $comm->rencana_mudik }}</td>
+                                                    <td>{{ $comm->tanggal_berangkat }}</td>
+                                                    <td>{{ $comm->tanggal_kembali }}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -432,9 +439,11 @@
             $('#tanggal_kembali').val(employee.tanggal_kembali);
             $('#btn_cancel').show();
             $('#div_data').hide();
+            $('#div_title').hide();
             $('#btn_edit').show();
         }else{
             $('#btn_cancel').hide();
+            $('#div_title').show();
             $('#div_data').show();
             $('#btn_edit').hide();
         }
@@ -452,44 +461,14 @@
       // } );
       var table = $('#example1').DataTable({
         "order": [],
-        'dom': 'Bfrtip',
+        // 'dom': 'Bfrtip',
         'responsive': true,
+        'paging' : false,
         'lengthMenu': [
         [ 10, 25, 50, -1 ],
         [ '10 rows', '25 rows', '50 rows', 'Show all' ]
         ],
-        'buttons': {
-          buttons:[
-          {
-            extend: 'pageLength',
-            className: 'btn btn-default',
-          },
-          {
-            extend: 'copy',
-            className: 'btn btn-success',
-            text: '<i class="fa fa-copy"></i> Copy',
-            exportOptions: {
-              columns: ':not(.notexport)'
-            }
-          },
-          {
-            extend: 'excel',
-            className: 'btn btn-info',
-            text: '<i class="fa fa-file-excel-o"></i> Excel',
-            exportOptions: {
-              columns: ':not(.notexport)'
-            }
-          },
-          {
-            extend: 'print',
-            className: 'btn btn-warning',
-            text: '<i class="fa fa-print"></i> Print',
-            exportOptions: {
-              columns: ':not(.notexport)'
-            }
-          },
-          ]
-        }
+        'buttons': false
       });
 
       // table.columns().every( function () {
@@ -510,12 +489,14 @@
 
     function edit() {
         $("#div_data").show();
+        $("#div_title").show();
         $('#btn_cancel').show();
         $('#btn_edit').hide();
     }
 
     function cancel() {
         $("#div_data").hide();
+        $("#div_title").hide();
         $('#btn_cancel').hide();
         $('#btn_edit').show();
     }

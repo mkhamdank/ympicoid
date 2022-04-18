@@ -340,10 +340,7 @@
                                     </td>
 
                                 </tr>
-
-
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>
@@ -359,7 +356,7 @@
             <form class="contact100-form validate-form" style="padding: 0px 25px 58px 25px;display: none" id="form_belum_survey">
                 <div style="width: 100%;">
                     <div class="col-xs-12 col-md-12 col-lg-12">
-                        <center style="font-size:16px">Hai <?= Auth::user()->name ?><br>Survey Dapat Diisi Pada <span style="color: red">Minggu, 02 April 2022 Pukul 12:00 - 18:00 </span> <br></center>
+                        <center style="font-size:16px">Hai <?= Auth::user()->name ?><br>Survey Dapat Diisi Pada <span style="color: red">Minggu, 24 April 2022 Pukul 12:00 - 18:00 </span> <br></center>
                     </div>
                 </div>
             </form>
@@ -386,7 +383,7 @@
 
         var tgl = "{{ $tgl }}";    
         
-        if (tgl >= "2022-04-08 07:00:00" && tgl <= "2022-04-08 18:00:00") {
+        if (tgl >= "2022-04-24 07:00:00" && tgl <= "2022-04-24 18:00:00") {
             $("#form_survey").show();
             $("#form_belum_survey").hide();
             hideAll();

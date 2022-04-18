@@ -87,7 +87,7 @@
 
             <div class="wrap-input100 validate-input m-t-35 m-b-35" data-validate = "Enter username">
               <input autocomplete="off" type="password" class="input100" id="password" name="password" required autofocus>
-              <span class="focus-input100" data-placeholder="Password"></span>
+              <span class="focus-input100" data-placeholder="Password. Contoh : User1234"></span>
             </div>
 
             <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
