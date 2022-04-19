@@ -435,20 +435,23 @@
 
         $.get('{{ url("vaksin/check") }}', data, function(result, status, xhr){
             if(result.status == true){
-                $('#vaksin_1').val(result.vaksin.vaksin_1);
-                $('#vaksin_2').val(result.vaksin.vaksin_2);
-                $('#jenis_vaksin').val(result.vaksin.jenis_vaksin).trigger('change');
-                // $('#call_vaksin_3').val(result.vaksin.call_vaksin_3);
-                $('#jenis_vaksin_3').val(result.vaksin.jenis_vaksin_3).trigger('change');
-                $('#vaksin_3').val(result.vaksin.vaksin_3);
-
-                if (result.vaksin.vaksin_3 == null && result.vaksin_3 == null && getActualFullDate() < result.date_vaksin_regis) {
+                if (result.vaksin == null && result.vaksin_3 == null && getActualFullDate() < result.date_vaksin_regis) {
                     $('#vaksin_register_btn').show();
                     $('#vaksin_register').hide();
                     $('#vaksin_register_btn_cancel').hide();
                     $('#call_vaksin_3_register').val('');
                 }else{
-                    $('#vaksin_register_btn').hide();
+                    $('#vaksin_1').val(result.vaksin.vaksin_1);
+                    $('#vaksin_2').val(result.vaksin.vaksin_2);
+                    $('#jenis_vaksin').val(result.vaksin.jenis_vaksin).trigger('change');
+                    // $('#call_vaksin_3').val(result.vaksin.call_vaksin_3);
+                    $('#jenis_vaksin_3').val(result.vaksin.jenis_vaksin_3).trigger('change');
+                    $('#vaksin_3').val(result.vaksin.vaksin_3);
+                    if (result.vaksin_3_data == null && result.vaksin_3 == null && getActualFullDate() < result.date_vaksin_regis) {
+                        $('#vaksin_register_btn').show();
+                    }else{
+                        $('#vaksin_register_btn').hide();
+                    }
                     $('#vaksin_register').hide();
                     $('#vaksin_register_btn_cancel').hide();
                 }

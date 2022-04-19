@@ -41,10 +41,15 @@ class HumanResourcesController extends Controller
 		try {
 			$vaksin = VaksinSurvey::where('employee_id',$request->get('employee_id'))->first();
 			$vaksin_3 = VaksinRegisterNew::where('employee_id',$request->get('employee_id'))->where('remark','vaksin_3')->first();
+			$vaksin_3_data = null;
+			if (count($vaksin) > 0) {
+				$vaksin_3_data = $vaksin->vaksin_3;
+			}
 			$response = array(
 				'status' => true,
 				'vaksin' => $vaksin,
 				'vaksin_3' => $vaksin_3,
+				'vaksin_3_data' => $vaksin_3_data,
 				'date_vaksin_regis' => '2022-04-28 23:59:59'
 			);
 			return Response::json($response);
