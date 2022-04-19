@@ -13,8 +13,8 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('design/dashboard/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('design/dashboard/css/font-awesome.css')}}">
-    <link rel="stylesheet" href="{{ asset('design/dashboard/css/templatemo-softy-pinko.css')}}">
-    <link rel="stylesheet" href="{{ url("bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('design/dashboard/css/templatemo-softy-pinko.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url("bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css")}}">
     @yield('stylesheets')
     </head>
 
