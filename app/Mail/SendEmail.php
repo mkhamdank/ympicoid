@@ -43,7 +43,7 @@ class SendEmail extends Mailable
             return $this->from('mis@ympi.co.id', 'PT. Yamaha Musical Products Indonesia')
             ->subject('Guest Self Assessment Covid19')
             ->view('mails.guest_assessment')
-            ->attach('http://10.109.52.1:887/miraimobiledev_V2/public/files/gsa/'.$this->data[0]->file.'');
+            ->attach('http://10.109.33.10/ympicoid/public/files/gsa/'.$this->data[0]->file.'');
         }
 
 
