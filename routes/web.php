@@ -36,7 +36,7 @@ Route::get('/', function () {
 			// return \redirect()->route('emp_service', ['id' => 1, 'tahun' => date('Y')]);
 			// return redirect()->route('index/employee/service/{ctg}', ['ctg' => 'home']);
 		} else {
-			if (Auth::user()->status_ganti == null) {
+			if (Auth::user()->status_ganti == "" || Auth::user()->status_ganti == null) {
 				return redirect('reset/password/'.Auth::user()->username);
 			}else{
 				return view('home');
