@@ -59,6 +59,12 @@
                                 <i class="fa fa-tty"></i> Kuisioner Emergency
                             </a>
                         </li>
+                        <li style="background-color:#fff">
+                           <a href="{{ url('mcu') }}" 
+                                @if(isset($page) && $page == "Kuisioner MCU") class="active" @endif>
+                                <i class="fa fa-plus"></i> Hasil MCU
+                            </a>
+                        </li>
                         <li style="padding-left:0px">
                             <a class="btn btn-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color:white;line-height: 30px;"><i class="fa fa-sign-out"></i> Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

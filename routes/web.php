@@ -154,10 +154,11 @@ Route::post('input/survey_stocktaking', 'StocktakingController@inputSurvey');
 Route::get('emergency', 'MasterController@emergency');
 Route::get('post/emergency', 'MasterController@postEmergency');
 
-
 Route::get('data_komunikasi', 'MasterController@DataKomunikasi');
 Route::get('post/data_komunikasi', 'MasterController@postDataKomunikasi');
 
+Route::get('mcu', 'HumanResourcesController@mcu');
+Route::get('post/mcu', 'HumanResourcesController@postMcu');
 
 Route::get('/home', [
 	'middleware' => 'permission', 

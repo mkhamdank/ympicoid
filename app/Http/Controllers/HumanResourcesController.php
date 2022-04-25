@@ -18,6 +18,7 @@ use App\KodeEtikQuestion;
 use App\KodeEtikAnswer;
 use App\VaksinRegisterNew;
 use App\VaksinSurvey;
+use App\McuSurvey;
 
 class HumanResourcesController extends Controller
 {
@@ -258,5 +259,70 @@ class HumanResourcesController extends Controller
 			return Response::json($response);
 		}
 	}
+
+	public function mcu(){
+
+        $title = 'Kuisioner Emergency';
+        $title_jp = '';
+
+        $empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and end_date is null LIMIT 1');
+
+        return view('mcu', array(
+            'title' => $title,
+            'title_jp' => $title_jp,
+            'empsync' => $empsync
+        ))->with('page', 'Kuisioner MCU');
+    }
+
+    public function postMcu(Request $request)
+    {
+        try {
+            $cek_input = db::select("select * from mcu_surveys where employee_id='".$request->get('employee_id')."'");
+
+            if (count($cek_input) > 0) {
+                $response = array(
+                    'status' => false,
+                    'datas' => 'Anda Sudah Mengisi Form Survey Medical Check Up Ini'
+                );
+                return Response::json($response);
+            }
+
+            else{
+                $forms = McuSurvey::create([
+                    'tanggal' => date('Y-m-d'),
+                    'employee_id' => $request->get('employee_id'),
+                    'name' => $request->get('name'),
+                    'department' => $request->get('department'),
+                    'jawaban' => $request->get('jawaban')
+                ]);
+
+                $forms->save();
+
+                $response = array(
+                    'status' => true,
+                    'datas' => 'Berhasil Input Data',
+                );
+                return Response::json($response);
+            }
+
+
+        } catch (QueryException $e){
+            $error_code = $e->errorInfo[1];
+            if($error_code == 1062){
+                $response = array(
+                    'status' => false,
+                    'datas' => 'Anda Sudah Mengisi Form Survey Medical Check Up Ini'
+                );
+                return Response::json($response);
+            }
+            else{
+                $response = array(
+                    'status' => false,
+                    'datas' => $e->getMessage()
+                );
+                return Response::json($response);
+            }
+        }
+    }
 
 }

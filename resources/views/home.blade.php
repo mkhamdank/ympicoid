@@ -69,6 +69,13 @@
                         <!-- <span>Media untuk mengumpulkan ketika terjadi suatu peristiwa emergency</span> -->
                     </a>
                 </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
+                    <a href="{{ url('mcu') }}"  class="mini-box"  style="margin-bottom:20px">
+                        <i><img src="{{ asset('images/dashboard/mcu.png')}}" alt="" height="50"></i>
+                        <strong style="font-size:12px">Hasil <br>MCU</strong>
+                        <!-- <span>Media untuk mengumpulkan ketika terjadi suatu peristiwa emergency</span> -->
+                    </a>
+                </div>
             </div>
         </div>
     </div>
