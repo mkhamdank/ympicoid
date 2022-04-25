@@ -270,7 +270,7 @@
 
                                     <div class="col-lg-6 col-md-12 col-sm-12">
                                       <fieldset>
-                                        <input type="number" class="form-control" id="no_hp" name="no_hp" placeholder="Nomor HP">
+                                        <input type="number" class="form-control" id="no_hp" name="no_hp" placeholder="Nomor HP (Wajib)">
                                       </fieldset>
                                     </div>
 
@@ -282,15 +282,15 @@
 
                                     <div class="col-lg-6 col-md-12 col-sm-12">
                                       <fieldset>
-                                        <input type="number" class="form-control" id="no_alternatif" name="no_alternatif" placeholder="Nomor Alternatif">
+                                        <input type="number" class="form-control" id="no_alternatif" name="no_alternatif" placeholder="Nomor Alternatif (Wajib)">
                                       </fieldset>
                                     </div>
 
 
                                     <div class="col-lg-6 col-md-12 col-sm-12">
                                       <!-- <fieldset> -->
-                                        <select class="form-control" title="Identitas Nomor Alternatif" name="hubungan" id="hubungan" data-hidden="true">
-                                            <option value="" selected="" disabled>Identitas Nomor Alternatif</option>
+                                        <select class="form-control" title="Identitas Nomor Alternatif (Wajib)" name="hubungan" id="hubungan" data-hidden="true">
+                                            <option value="" selected="" disabled>Identitas Nomor Alternatif (Wajib)</option>
                                             <option value="Orang Tua">Orang Tua</option>
                                             <option value="Suami atau Istri">Suami atau Istri</option>
                                             <option value="Anak">Anak</option>
