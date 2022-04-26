@@ -224,72 +224,79 @@
                     <!-- <h3 class="section-title" style="background-color: white;font-size: 12px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;margin-bottom: 10px"><?= $empsync[0]->employee_id ?> - <?= $empsync[0]->name ?></h3> -->
                 </div>
                 <div class="contact-form" style="background-color: white;padding: 20px;border-radius: 10px">
-                   <div class="row">
-                        
-                    </div>
-                <!-- ***** Section Title End ***** -->
+                 <div class="row">
 
-                    <div class="row">
-                        <!-- ***** Contact Form Start ***** -->
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="contact-form">
-                                <!-- <form id="contact" action="" method="get"> -->
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                     {{ csrf_field() }}
-                                  <div class="row">
+                 </div>
+                 <!-- ***** Section Title End ***** -->
+
+                 <div class="row" id="answer">
+                    <!-- ***** Contact Form Start ***** -->
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="contact-form">
+                            <!-- <form id="contact" action="" method="get"> -->
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                {{ csrf_field() }}
+                                <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12">
                                       <fieldset>
                                         <input type="hidden" name="employee_id" id="employee_id" value="{{$empsync[0]->employee_id}}">
                                         <input type="hidden" name="name" id="name" value="{{$empsync[0]->name}}">
                                         <!-- <input type="hidden" name="department" id="department" value="{{$empsync[0]->department}}"> -->
                                         <input type="text" class="form-control"  placeholder="NIK Karyawan" readonly="" value="{{$empsync[0]->employee_id}} - {{$empsync[0]->name}}">
-                                      </fieldset>
-                                    </div>
+                                    </fieldset>
+                                </div>
                                     <!-- <div class="col-lg-4 col-md-12 col-sm-12">
                                       <fieldset>
                                         <input type="text" class="form-control" id="name" name="name" placeholder="Nama Lengkap" readonly="" value="{{$empsync[0]->name}}">
                                       </fieldset>
-                                    </div> -->
-                                     <div class="col-lg-6 col-md-12 col-sm-12">
+                                  </div> -->
+                                  <div class="col-lg-6 col-md-12 col-sm-12">
                                       <fieldset>
                                         <input type="text" class="form-control" id="department" name="department" placeholder="Department" readonly="" value="{{$empsync[0]->department}}">
-                                      </fieldset>
-                                    </div>
+                                    </fieldset>
+                                </div>
 
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                      <fieldset>
-                                        <span id="pertanyaan">Apakah anda sudah menerima hasil Medical Check Up melalui broadcast WA? </span>
-                                        </fieldset>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4 col-sm-4" style="text-align: right;">
-                                        <fieldset>
-                                        <label class="radio" style="margin-top: 5px;margin-left: 5px">Iya
-                                            <input type="radio" id="jawaban" name="jawaban" value="Iya" required="">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="radio" style="margin-top: 5px;margin-left: 5px">Tidak
-                                            <input type="radio" id="jawaban" name="jawaban" value="Tidak" required="">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        </fieldset>
-                                    </div>
-
-                                    <div class="col-lg-12" style="margin-top: 20px">
-                                      <fieldset>
-                                        <button class="main-button" onclick="save()">Submit</button>
-                                      </fieldset>
-                                    </div>
-                                  </div>
-                                <!-- </form> -->
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                  <fieldset>
+                                    <span id="pertanyaan">Apakah anda sudah menerima hasil Medical Check Up melalui broadcast WA? </span>
+                                </fieldset>
                             </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="text-align: right;">
+                                <fieldset>
+                                    <label class="radio" style="margin-top: 5px;margin-left: 5px">Iya
+                                        <input type="radio" id="jawaban" name="jawaban" value="Iya" required="">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="radio" style="margin-top: 5px;margin-left: 5px">Tidak
+                                        <input type="radio" id="jawaban" name="jawaban" value="Tidak" required="">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </fieldset>
+                            </div>
+
+                            <div class="col-lg-12" style="margin-top: 20px">
+                              <fieldset>
+                                <button class="main-button" onclick="save()">Submit</button>
+                            </fieldset>
                         </div>
-                        <!-- ***** Contact Form End ***** -->
                     </div>
+                    <!-- </form> -->
                 </div>
             </div>
+            <!-- ***** Contact Form End ***** -->
+        </div>
+
+        <div id="div_detail_sudah" style="margin-top: 20px">
+            <center><span style="font-size: 18px;text-align: center;color: black;">
+                <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                Terimakasih <span style="color: blue;">{{$empsync[0]->name}}</span><span style="color: black;"> telah melakukan Pengisian Penerimaan Hasil MCU</span><br> pada<br><span style="font-weight: bold;color: red;">{{$empsync[0]->created_at}}</span> 
+            </span></center>
         </div>
     </div>
+</div>
+</div>
+</div>
 </section>
 
 @stop
@@ -298,8 +305,8 @@
 @section('scripts')
 <script src="{{ url("bower_components/jquery/dist/jquery.min.js")}}"></script>
 <script src="{{ url("bower_components/bootstrap/dist/js/bootstrap.min.js")}}"></script>
- <script src="{{ asset('js/jquery.min.js')}}"></script>
- 
+<script src="{{ asset('js/jquery.min.js')}}"></script>
+
 <script src="{{ url("js/jquery.gritter.min.js") }}"></script>
 <script type="text/javascript">
     $.ajaxSetup({
@@ -309,10 +316,16 @@
     });
 
     jQuery(document).ready(function() {
-    });
+        $('#div_detail_sudah').hide();
+
+         if (parseInt('{{count($empget)}}') > 0) {
+          $('#answer').hide();
+           $('#div_detail_sudah').show();
+       }
+   });
     
 
-  
+
     function save() {
         $("#loading").show();
 
@@ -333,7 +346,10 @@
             if(result.status == true){    
                 $("#loading").hide();
                 openSuccessGritter("Success","Berhasil Dibuat");
-                location.reload();
+                // location.reload();
+                $('#answer').hide();
+                $('#div_detail_sudah').show();
+
             }
             else {
                 $("#loading").hide();

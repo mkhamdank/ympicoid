@@ -266,11 +266,14 @@ class HumanResourcesController extends Controller
         $title_jp = '';
 
         $empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and end_date is null LIMIT 1');
+        $empget = DB::select('select * from mcu_surveys where employee_id = "'.Auth::user()->username.'"');
+
 
         return view('mcu', array(
             'title' => $title,
             'title_jp' => $title_jp,
-            'empsync' => $empsync
+            'empsync' => $empsync,
+            'empget' => $empget
         ))->with('page', 'Kuisioner MCU');
     }
 
