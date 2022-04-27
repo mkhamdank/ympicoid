@@ -265,7 +265,12 @@ class HumanResourcesController extends Controller
         $title = 'Kuisioner Emergency';
         $title_jp = '';
 
-        $empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and end_date is null LIMIT 1');
+        $date = date('Y-m-d');
+
+        $empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and (end_date is null or end_date > "'.$date.'")');
+
+        // var_dump($empsync);die();
+
         $empget = DB::select('select * from mcu_surveys where employee_id = "'.Auth::user()->username.'"');
 
 

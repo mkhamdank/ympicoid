@@ -30,6 +30,10 @@
         cursor: pointer;
     }
 
+    .dataTables_filter {
+        text-align: left !important;
+    }
+
     /* Create a custom radio button */
     .checkmark {
         position: absolute;
@@ -363,12 +367,12 @@
                                                     <th>NIK</th>
                                                     <th>Nama</th>
                                                     <th>Dept</th>
+                                                    <th>Posisi</th>
                                                     <th>Nomor HP</th>
                                                     <th>Nomor Alternatif</th>
                                                     <th>Kota Mudik</th>
                                                     <th>Tanggal Berangkat</th>
                                                     <th>Tanggal Kembali</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -376,7 +380,8 @@
                                                 <tr>
                                                     <td>{{ $comm->employee_id }}</td>
                                                     <td>{{ $comm->name }}</td>
-                                                    <td>{{ $comm->department }}</td>
+                                                    <td>{{ $comm->department_shortname }}</td>
+                                                    <td>{{ $comm->position }}</td>
                                                     <td>{{ $comm->no_hp }}</td>
                                                     <td>{{ $comm->no_alternatif }}</td>
                                                     <td>{{ $comm->rencana_mudik }}</td>
@@ -463,7 +468,7 @@
         "order": [],
         // 'dom': 'Bfrtip',
         'responsive': true,
-        'paging' : false,
+        'paging' : true,
         'lengthMenu': [
         [ 10, 25, 50, -1 ],
         [ '10 rows', '25 rows', '50 rows', 'Show all' ]

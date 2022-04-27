@@ -292,10 +292,43 @@ class MasterController extends Controller
         $title = 'Data Komunikasi Lebaran';
         $title_jp = '';
 
-        $empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and end_date is null LIMIT 1');
+        $date = date('Y-m-d');
 
-        $communication = DB::select('select * from employee_communications where department = "'.$empsync[0]->department.'"');
+        $empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and (end_date is null or end_date > "'.$date.'")');
+
+        $restrict_dept = "";
+
+        if ($empsync[0]->department == "Management Information System Department" || $empsync[0]->department == "General Affairs Department" || $empsync[0]->department == "Human Resources Department" || $empsync[0]->department == null) {
+            $restrict_dept = "";
+        }
+        else{
+            $restrict_dept = "and employee_syncs.department = '".$empsync[0]->department."'";
+        }
+
+        $communication = DB::select('
+            SELECT
+                employee_communications.employee_id,
+                employee_communications.`name`,
+                employee_communications.no_hp,
+                employee_communications.no_alternatif,
+                employee_communications.rencana_mudik,
+                employee_communications.tanggal_berangkat,
+                employee_communications.tanggal_kembali,
+                department_shortname,
+                position
+            FROM
+                employee_communications
+                JOIN employee_syncs ON employee_syncs.employee_id = employee_communications.employee_id
+                JOIN departments ON department_name = employee_communications.department 
+            WHERE
+            end_date is null
+            '.$restrict_dept.'
+            ORDER BY 
+                position,employee_id
+            ');
         // $employee = DB::select('select * from employee_communications where employee_id = "'.Auth::user()->username.'" limit 1');
+
+            // select * from employee_communications where department = "'.$empsync[0]->department.'"
         $employee = EmployeeCommunication::where('employee_id',Auth::user()->username)->first();
 
         return view('data_komunikasi', array(
