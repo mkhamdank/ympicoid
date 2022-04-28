@@ -15,6 +15,7 @@ use App\QuizLog;
 use App\Employee;
 use App\Pkb;
 use App\EmergencySurvey;
+use App\VaksinSurvey;
 use App\EmployeeCommunication;
 use App\SurveyLog;
 use App\KodeEtikAnswer;
@@ -331,12 +332,17 @@ class MasterController extends Controller
             // select * from employee_communications where department = "'.$empsync[0]->department.'"
         $employee = EmployeeCommunication::where('employee_id',Auth::user()->username)->first();
 
+        $vaksin = VaksinSurvey::where('employee_id',Auth::user()->username)->first();
+        $mudik = EmployeeCommunication::where('employee_id',Auth::user()->username)->first();
+
         return view('data_komunikasi', array(
             'title' => $title,
             'title_jp' => $title_jp,
             'empsync' => $empsync,
             'communication' => $communication,
             'employee' => $employee,
+            'vaksin' => $vaksin,
+            'mudik' => $mudik,
         ))->with('page', 'Data Komunikasi');
     }
 
@@ -411,4 +417,82 @@ class MasterController extends Controller
             }
         }
     }
+
+    public function indexMudik($id) {
+        $title = 'Mudik';
+
+        $date = date('Y-m-d');
+
+        $empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and (end_date is null or end_date > "'.$date.'")');
+
+        $communication = DB::select('select * from employee_communications where employee_id = "'.Auth::user()->username.'"');
+
+        return view('mudik', array(
+            'title' => $title,
+            'empsync' => $empsync,
+            'communication' => $communication,
+            'id' => $id
+        ))->with('page', 'Data Mudik');
+    }
+
+
+    public function postMudik(Request $request){
+
+        try{
+            $filename_berangkat = null;
+            $filename_kembali = null;
+            $tujuan_upload = 'files/mudik';
+
+            if ($request->input('status') == "berangkat") {
+                $file_berangkat = $request->file('file_berangkat');
+                $nama_berangkat = $file_berangkat->getClientOriginalName();
+
+                $filename_berangkat = pathinfo($nama_berangkat, PATHINFO_FILENAME);
+                $extension_berangkat = pathinfo($nama_berangkat, PATHINFO_EXTENSION);
+                $filename_berangkat = $request->input('employee_id').'_'.$request->input('status').'.'.$extension_berangkat;
+                // var_dump($file_berangkat);die();
+                $file_berangkat->move($tujuan_upload,$filename_berangkat);
+
+                $forms2 = EmployeeCommunication::where('employee_id',$request->input('employee_id'))
+                ->update([
+                    'test_type' => $request->get('jenis'),
+                    'departure' => $filename_berangkat,
+                    'tanggal_departure' => $request->get('date_departure')
+                ]);
+            }
+
+            else if ($request->input('status') == "kembali") {
+                $file_kembali = $request->file('file_kembali');
+                $nama_kembali = $file_kembali->getClientOriginalName();
+
+                $filename_kembali = pathinfo($nama_kembali, PATHINFO_FILENAME);
+                $extension_kembali = pathinfo($nama_kembali, PATHINFO_EXTENSION);
+                $filename_kembali = $request->input('employee_id').'_'.$request->input('status').'.'.$extension_kembali;
+
+                $file_kembali->move($tujuan_upload,$filename_kembali);
+
+                $forms2 = EmployeeCommunication::where('employee_id',$request->input('employee_id'))
+                ->update([
+                    'test_type' => $request->get('jenis'),
+                    'arrived' => $filename_kembali,
+                    'tanggal_arrived' => $request->get('date_arrived')
+                ]);
+            }
+         
+
+            $response = array(
+                'status' => true,
+                'message' => 'Data Berhasil Disimpan'
+            );
+            return Response::json($response);
+        }
+        catch (\Exception $e) {
+            $response = array(
+                'status' => false,
+                'message' => $e->getMessage()
+            );
+            return Response::json($response);
+        }
+    }
+
 }

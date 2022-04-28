@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use App\EmployeeCommunication;
+use App\VaksinSurvey;
 
 class HomeController extends Controller
 {
@@ -18,7 +20,13 @@ class HomeController extends Controller
         if (Auth::user()->status_ganti == null || Auth::user()->status_ganti == "") {
             return redirect('reset/password/'.Auth::user()->username);
         } else {
-            return view('home')->with('page', 'Dashboard');
+            $vaksin = VaksinSurvey::where('employee_id',Auth::user()->username)->first();
+            $mudik = EmployeeCommunication::where('employee_id',Auth::user()->username)->first();
+
+            return view('home', array(
+                'vaksin' => $vaksin,
+                'mudik' => $mudik,
+            ))->with('page', 'Dashboard');
         }
     }
 }

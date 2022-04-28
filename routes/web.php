@@ -128,7 +128,6 @@ Route::group(['nav' => 'A4', 'middleware' => 'permission'], function(){
 	Route::get('show/role/{id}', 'RoleController@show');
 });
 
-
 Route::get('laporan_kesehatan', 'MasterController@laporan_kesehatan');
 Route::get('laporan_kesehatan/input', 'MasterController@input_laporan_kesehatan');
 Route::get('survey_covid', 'MasterController@survey_covid');
@@ -159,6 +158,10 @@ Route::get('post/data_komunikasi', 'MasterController@postDataKomunikasi');
 
 Route::get('mcu', 'HumanResourcesController@mcu');
 Route::get('post/mcu', 'HumanResourcesController@postMcu');
+
+Route::get('mudik/{id}', 'MasterController@indexMudik');
+Route::post('post/mudik', 'MasterController@postMudik');
+
 
 Route::get('/home', [
 	'middleware' => 'permission', 

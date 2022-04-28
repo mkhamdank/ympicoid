@@ -235,11 +235,67 @@
                 </div>
                 <!-- <div class="contact-form" id="div_edit">
                 </div> -->
+                @if(count($mudik) > 0)
+                @if($mudik->rencana_mudik != null)
+                @if($mudik->departure == null || $mudik->arrived == null)
+                    @if(count($vaksin) > 0)
+                            @if($vaksin->vaksin_3 == null && $vaksin->vaksin_2 != null && $vaksin->vaksin_1 != null)
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: #ff4f4f;color: white;text-align: justify;font-size: 11px;padding-top: 10px;padding-bottom:10px;margin-bottom: 10px;border-radius: 10px;">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="padding-right: 8px;">Anda terdeteksi mudik dan belum melaksanakan Vaksin 3. Silahkan lampirkan hasil test Rapid Antigen saat akan berangkat dan kembali. Tekan tombol di sebelah kanan untuk upload data.</td>
+                                            <td><a style="text-decoration: none;cursor:pointer;background-color:white;color:black;border: 1px solid black;padding: 10px;border-radius: 10px;" href="{{url('mudik/rapid')}}">Rapid</a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            @elseif($vaksin->vaksin_3 == null && $vaksin->vaksin_2 == null && $vaksin->vaksin_1 != null)
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: #ff4f4f;color: white;text-align: justify;font-size: 11px;padding-top: 10px;padding-bottom:10px;margin-bottom: 10px;border-radius: 10px;">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="padding-right: 8px;">Anda terdeteksi mudik dan belum melaksanakan Vaksin 2 & Vaksin 3. Silahkan lampirkan hasil test PCR saat akan berangkat dan kembali. Tekan tombol di sebelah kanan untuk upload data.</td>
+                                            <td><a style="text-decoration: none;cursor:pointer;background-color:white;color:black;border: 1px solid black;padding: 10px;border-radius: 10px;" href="{{url('mudik/pcr')}}">PCR</a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                             @elseif($vaksin->vaksin_3 == null && $vaksin->vaksin_2 == null && $vaksin->vaksin_1 == null)
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: #ff4f4f;color: white;text-align: justify;font-size: 11px;padding-top: 10px;padding-bottom:10px;margin-bottom: 10px;border-radius: 10px;">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="padding-right: 8px;">Anda terdeteksi mudik dan belum melaksanakan Vaksin. Silahkan lampirkan hasil test PCR saat akan berangkat dan kembali. Tekan tombol di sebelah kanan untuk upload data.</td>
+                                            <td><a style="text-decoration: none;cursor:pointer;background-color:white;color:black;border: 1px solid black;padding: 10px;border-radius: 10px;" href="{{url('mudik/pcr')}}">PCR</a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            @else
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: #57ff3d;color: black;text-align: justify;font-size: 11px;padding-top: 10px;padding-bottom:10px;margin-bottom: 10px;border-radius: 10px;">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td rowspan="2" style="padding-right: 8px;">Anda sudah melaksanakan Vaksin 3 (Booster). Tetap terapkan protokol kesehatan dan lindungi keluarga Anda.</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            @endif
+                    @else
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: #ff4f4f;color: white;text-align: justify;font-size: 11px;padding-top: 10px;padding-bottom:10px;margin-bottom: 10px;border-radius: 10px;">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td rowspan="2" style="padding-right: 8px;">Anda terdeteksi mudik dan belum melaksanakan Vaksin. Silahkan lampirkan hasil test PCR saat akan berangkat dan kembali. Tekan tombol di sebelah kanan untuk upload data.</td>
+                                    <td><a style="text-decoration: none;cursor:pointer;background-color:white;color:black;border: 1px solid black;padding: 10px;border-radius: 10px;" href="{{url('mudik/pcr')}}">PCR</a></td>
+                                    <td>
+                                        <a style="text-decoration: none;cursor:pointer;background-color:white;color:black;border: 1px solid black;padding: 10px;border-radius: 10px;" href="{{url('vaksin')}}">Vaksin</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    @endif
+                @endif
+                @endif
+                @endif
                 <div class="contact-form" style="background-color: white;padding: 20px;border-radius: 10px" id="div_data">
                    <div class="row">
                         <div class="offset-lg-3 col-lg-6">
                             <div class="center-text">
-                                <p>Form ini merupakan digunakan untuk mengumpulkan data Komunikasi Saat Lebaran</p>
+                                <p>Form ini digunakan untuk mengumpulkan data Komunikasi Saat Lebaran</p>
                             </div>
                         </div>
                     </div>
@@ -356,6 +412,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 10px">
                             <button class="main-button pull-right" onclick="edit()" id="btn_edit">Edit Data Saya</button>
                         </div>
+
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="contact-form">
                                   <div class="row" style="overflow-x: scroll;">
