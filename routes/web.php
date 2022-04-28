@@ -39,7 +39,7 @@ Route::get('/', function () {
 			if (Auth::user()->status_ganti == "" || Auth::user()->status_ganti == null) {
 				return redirect('reset/password/'.Auth::user()->username);
 			}else{
-				return view('home');
+				return redirect()->route('home');
 			}
 		}
 	} else {
