@@ -255,6 +255,7 @@
                             <div class="validate-input" style="position: relative; width: 100% !important">
                                 <!-- <input type="text" name="vaksin_2" id="vaksin_2" class="form-control" style="width: 100% !important" placeholder="Tanggal Vaksin 2"> -->
                                 <select style="width: 100%;margin-bottom: 0px" class="form-control" name="jenis_vaksin" id="jenis_vaksin">
+                                    <option value="" selected="" disabled>Pilih Jenis Vaksin</option>
                                     <option value="Sinovac">Sinovac</option>
                                     <option value="AstraZeneca">AstraZeneca</option>
                                     <option value="SinoPharm">SinoPharm</option>
@@ -283,6 +284,7 @@
                             <div class="validate-input" style="position: relative; width: 100% !important">
                                 <!-- <input type="text" name="vaksin_2" id="vaksin_2" class="form-control" style="width: 100% !important" placeholder="Tanggal Vaksin 2"> -->
                                 <select style="width: 100%;margin-bottom: 0px" class="form-control" name="jenis_vaksin_3" id="jenis_vaksin_3">
+                                    <option value="" selected="" disabled>Pilih Jenis Vaksin 3</option>
                                     <option value="Sinovac">Sinovac</option>
                                     <option value="AstraZeneca">AstraZeneca</option>
                                     <option value="SinoPharm">SinoPharm</option>
@@ -436,12 +438,12 @@
         $.get('{{ url("vaksin/check") }}', data, function(result, status, xhr){
             if(result.status == true){
                 if (result.vaksin == null) {
-                    if (result.vaksin_3 == null && getActualFullDate() < result.date_vaksin_regis) {
+                    if (result.vaksin == null && result.vaksin_3 == null && getActualFullDate() < result.date_vaksin_regis) {
                         $('#vaksin_register_btn').show();
                         $('#vaksin_register').hide();
                         $('#vaksin_register_btn_cancel').hide();
                         $('#call_vaksin_3_register').val('');
-                    }else if(result.vaksin_3 != null && getActualFullDate() < result.date_vaksin_regis){
+                    }else if(result.vaksin == null && result.vaksin_3 != null && getActualFullDate() < result.date_vaksin_regis){
                         $('#vaksin_register_btn').show();
                         $('#vaksin_register').hide();
                         $('#vaksin_register_btn_cancel').hide();
