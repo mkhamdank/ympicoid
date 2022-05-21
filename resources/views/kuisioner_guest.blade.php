@@ -455,14 +455,14 @@
 		else if ($('input[id="jawaban0"]:checked').val() == "Iya" || $('input[id="jawaban1"]:checked').val() == "Iya" || $('input[id="jawaban2"]:checked').val() == "Iya" || $('input[id="jawaban3"]:checked').val() == "Iya" ) {
 			
 			if (($('#createVaksin').val() == "Belum Vaksin" || $('#createVaksin').val() == "Belum Vaksin Non Jatim" || $('#createVaksin').val() == "Sudah Vaksin Dosis 1") && $('#file_pcr').val() == '') {
-					$("#loading").hide();
-					openErrorGritter('Error!', 'Hasil PCR Harus Dilampirkan');
-					return false;
+					// $("#loading").hide();
+					// openErrorGritter('Error!', 'Hasil PCR Harus Dilampirkan');
+					// return false;
 			}
 			else if ($('#createVaksin').val() == "Sudah Vaksin" || $('#createVaksin').val() == "Sudah Vaksin Dosis 2" || $('#createVaksin').val() == "Sudah Vaksin Dosis 3"){
-				$("#loading").hide();
-				openErrorGritter('Error!', 'Sertifikat Vaksin Harus Dilampirkan');
-				return false;
+				// $("#loading").hide();
+				// openErrorGritter('Error!', 'Sertifikat Vaksin Harus Dilampirkan');
+				// return false;
 			}
 		}
 
