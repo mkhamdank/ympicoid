@@ -37,13 +37,13 @@
                         <!-- <span>Daftar dan Update Data Vaksin Anda pada menu ini</span> -->
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
+                <!-- <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
                     <a href="{{ url('data_komunikasi') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/communication.png')}}" alt="" height="50"></i>
                         <strong style="font-size:12px">Data <br>Komunikasi</strong>
-                        <!-- <span>Media untuk mengumpulkan ketika terjadi suatu peristiwa emergency</span> -->
+                        <span>Media untuk mengumpulkan ketika terjadi suatu peristiwa emergency</span>
                     </a>
-                </div>
+                </div> -->
                 <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
                     <a href="{{ url('pkb') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/pkb.png')}}" alt="" height="50"></i>
@@ -65,20 +65,20 @@
                         <!-- <span>Seberapa Mengerti Anda Mengenai Stocktaking di YMPI</span> -->
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
+               <!--  <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
                     <a href="{{ url('emergency') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/emergency1.png')}}" alt="" height="50"></i>
                         <strong style="font-size:12px">Kuisioner <br>Emergency</strong>
-                        <!-- <span>Media untuk mengumpulkan ketika terjadi suatu peristiwa emergency</span> -->
+                        <span>Media untuk mengumpulkan ketika terjadi suatu peristiwa emergency</span>
                     </a>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
+                </div> -->
+                <!-- <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
                     <a href="{{ url('mcu') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/mcu.png')}}" alt="" height="50"></i>
                         <strong style="font-size:12px">Hasil <br>MCU</strong>
-                        <!-- <span>Media untuk mengumpulkan ketika terjadi suatu peristiwa emergency</span> -->
+                        <span>Media untuk mengumpulkan ketika terjadi suatu peristiwa emergency</span>
                     </a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
