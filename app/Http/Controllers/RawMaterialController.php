@@ -100,6 +100,10 @@ class RawMaterialController extends Controller {
 	public function sendPoNotification($po_number) {
 
 		$exclude = [
+			'Y10053',
+			'Y31520',
+			'Y81811',
+
 			'Y31504',
 			'Y10022',
 			'Y81801'
