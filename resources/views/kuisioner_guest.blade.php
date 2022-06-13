@@ -270,6 +270,10 @@
 					</label>
 				</div> -->
 
+				<label class="label-input1002" id="labellokasi">Flow Penanganan K3 Tamu :</label>
+				<a href="{{ url('ympi_guest.png') }}" target="_blank" style="color:blue" onclick="viewImage()">Klik Untuk Melihat Gambar</a>
+				<span style="color:red;font-size: 14px;"> (Mohon dibaca dan dipahami terkait aturan diatas)</span>
+				<span id="cek_gambar" style="display:none"></span>
 
 				<label class="label-input1002" id="labellokasi">Asal Provinsi</label>
 				<a href="javascript:void(0)" style="border-color: black; color: black;" id="btn_non_jatim" onclick="btnCategory('non_jatim')" class="btn btn-sm">Non Jawa Timur</a>
@@ -370,8 +374,18 @@
       }
     }); 
 
+    function viewImage(){
+    	$("#cek_gambar").html('Sudah');
+    }
+
 	function save() {
 		$("#loading").show();
+
+		if ($("#cek_gambar").text() == "") {
+			$("#loading").hide();
+			openErrorGritter('Error!', 'Mohon Baca dan Pahami Aturan K3 dengan klik link pada K3');
+			return false;
+		}
 
 		if($("#name").val() == ""){
 		    $("#loading").hide();
