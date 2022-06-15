@@ -68,17 +68,17 @@
 
 
           <ul class="login-more p-t-190">
-            <!-- <li class="m-b-8">
+            <li class="m-b-8">
               <span class="txt1">
                 Forgot
               </span>
 
-              <a href="#" class="txt2">
-                Username / Password?
+              <a href="{{url('forgot/password')}}" class="txt2">
+                Password?
               </a>
             </li>
 
-            <li>
+            <!-- <li>
               <span class="txt1">
                 Don’t have an account?
               </span>

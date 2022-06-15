@@ -43,6 +43,90 @@ class PasswordController extends Controller
 		}
     }
 
+    public function requestResetPasswordWhatsapp(Request $request)
+    {
+        try {
+            $cekuser = User::where('username',strtoupper($request->get('employee_id')))->first();
+            if ($cekuser) {
+                $cekemp = DB::table('employee_syncs')->where('employee_id',strtoupper($request->get('employee_id')))->first();
+                if ($cekemp) {
+                    $new_pass = rand(10000000,99999999);
+                    $cekuser->password = bcrypt($new_pass);
+                    $cekuser->status_ganti = "";
+                    $cekuser->save();
+
+                    if(substr($cekemp->phone, 0, 1) == '+' ){
+                       $phone = substr($cekemp->phone, 1, 15);
+                     }
+                     else if(substr($cekemp->phone, 0, 1) == '0'){
+                       $phone = "62".substr($cekemp->phone, 1, 15);
+                     }
+                     else{
+                       $phone = $cekemp->phone;
+                     }
+
+                            // $phone = '6285645896741';
+                     $messages = 'PERMINTAAN RESET PASSWORD! JANGAN BERI password ini ke siapa pun, TERMASUK KARYAWAN YMPI. WASPADA PENIPUAN! MASUK KE AKUN dengan password '.$new_pass.'.';
+
+                     $curl = curl_init();
+
+                     curl_setopt_array($curl, array(
+                      CURLOPT_URL => 'https://app.whatspie.com/api/messages',
+                      CURLOPT_RETURNTRANSFER => true,
+                      CURLOPT_ENCODING => '',
+                      CURLOPT_MAXREDIRS => 10,
+                      CURLOPT_TIMEOUT => 0,
+                      CURLOPT_FOLLOWLOCATION => true,
+                      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                      CURLOPT_CUSTOMREQUEST => 'POST',
+                      CURLOPT_POSTFIELDS => 'receiver='.$phone.'&device=6281130561777&message='.urlencode ($messages).'&type=chat',
+                      CURLOPT_HTTPHEADER => array(
+                        'Accept: application/json',
+                        'Content-Type: application/x-www-form-urlencoded',
+                        'Authorization: Bearer UAqINT9e23uRiQmYttEUiFQ9qRMUXk8sADK2EiVSgLODdyOhgU'
+                      ),
+                    ));
+                     curl_exec($curl);
+
+                    $response = array(
+                        'status' => true,
+                    );
+                    return Response::json($response);
+                }else{
+                    $response = array(
+                        'status' => false,
+                        'message' => 'Karyawan Tidak Ditemukan'
+                    );
+                    return Response::json($response);
+                }
+            }else{
+                $response = array(
+                    'status' => false,
+                    'message' => 'User Tidak Ditemukan'
+                );
+                return Response::json($response);
+            }
+        } catch (\Exception $e) {
+            $response = array(
+                'status' => false,
+                'message' => $e->getMessage()
+            );
+            return Response::json($response);
+        }
+        // if (count($cek) > 0) {
+        //     $suhu = $cek->id;
+        //     $mail_to = $request->get('email');
+        //     $contactList = [];
+        //     $contactList[0] = 'mokhamad.khamdan.khabibi@music.yamaha.com';
+        //     $contactList[1] = 'rio.irvansyah@music.yamaha.com';
+        //     Mail::to($mail_to)->bcc($contactList,'BCC')->send(new SendEmail($suhu, 'request_reset_password'));
+
+        //     return back()->with('success', "Please check your email.")->with('user',$cek);
+        // }else{
+        //     return back()->with('error', "Your email doesn't exists.");
+        // }
+    }
+
     public function resetPasswordConfirm(Request $request)
     {
     	$password = $request->get('password');

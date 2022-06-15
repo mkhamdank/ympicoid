@@ -47,12 +47,18 @@ Route::get('/', function () {
 	}
 });
 
+// Route::get('/forgot/password', function () {
+//     return view('auth.passwords.email')->with('success');
+// })->middleware('guest')->name('password.request');
+
 Route::get('/forgot/password', function () {
-    return view('auth.passwords.email')->with('success');
-})->middleware('guest')->name('password.request');
+    return view('auth.passwords.forgot')->with('success');
+});
+
+Route::get('request/reset/password', 'PasswordController@requestResetPasswordWhatsapp');
 
 Route::get('reset/password/{id}', 'PasswordController@resetPassword');
-Route::post('request/reset/password', 'PasswordController@requestResetPassword');
+// Route::post('request/reset/password', 'PasswordController@requestResetPassword');
 Route::post('reset/password/confirm', 'PasswordController@resetPasswordConfirm');
 
 Route::get('register', 'PasswordController@register');
@@ -202,5 +208,7 @@ Route::get('po_confirmation','RawMaterialController@indexPoConfirmation');
 Route::get('fetch/po','RawMaterialController@fetchPo');
 Route::post('input/po_confirmation', 'RawMaterialController@inputPoConfirmation');
 Route::get('send/po_notification/{po_number}', 'RawMaterialController@sendPoNotification');
+
+
 
 //END RAW MATERIAL
