@@ -40,6 +40,9 @@
                       <span style="font-size: 12px">{{ session('success') }}</span>
                   </div>   
               @endif
+              <center>
+                <span>Sistem akan mengirimkan <b style="color: red">Whatsapp Otomatis</b> ke nomor Whatsapp Anda.<br>Pastikan <b style="color: red">Nomor Whatsapp</b> Anda <b style="color: red">benar dan aktif</b>.<br><b><i>Ikuti instruksi selanjutnya</i></b> pada pesan Whatsapp.</span>
+              </center>
 
             <div class="wrap-input100 validate-input" style="margin-top: 20px;">
               <input autocomplete="off" type="text" class="input100" placeholder="Masukkan NIK" id="employee_id" name="employee_id" required autofocus>
