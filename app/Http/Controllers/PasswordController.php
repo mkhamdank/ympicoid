@@ -66,7 +66,7 @@ class PasswordController extends Controller
                      }
 
                             // $phone = '6285645896741';
-                     $messages = 'PERMINTAAN RESET PASSWORD! JANGAN BERI password ini ke siapa pun, TERMASUK KARYAWAN YMPI. WASPADA PENIPUAN! MASUK KE AKUN dengan password '.$new_pass.'.';
+                     $messages = 'PERMINTAAN RESET PASSWORD YMPI.CO.ID !!! JANGAN BERI password ini ke siapa pun, TERMASUK KARYAWAN YMPI! WASPADA PENIPUAN! MASUK KE AKUN dengan password '.$new_pass.'.';
 
                      $curl = curl_init();
 
