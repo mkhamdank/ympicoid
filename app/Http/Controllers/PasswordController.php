@@ -74,7 +74,7 @@ class PasswordController extends Controller
                      // dengan password ".$new_pass."
                      $nik = strtoupper($request->get('employee_id'));
                      // $messages = "Permintaan Reset Password https://ympi.co.id. Jangan Berikan Password Ini Kepada Siapapun, Termasuk ke Karyawan YMPI! Masuk ke Akun https://ympi.co.id. Klik Link Berikut : http://ympi.co.id/ympicoid/public/reset/password/new/".base64_encode($nik);
-                     $messages = "Permintaan Reset Password YMPICOID. Abaikan pesan berikut jika ini bukan Anda! Klik Link Berikut Untuk Mengubah Password : http://ympi.co.id/ympicoid/public/reset/password/new/".base64_encode($nik);
+                     $messages = "Permintaan Reset Password YMPICOID. Abaikan pesan berikut jika ini bukan Anda! Klik Link Berikut Untuk Mengubah Password : https://ympi.co.id/ympicoid/public/reset/password/new/".base64_encode($nik);
 
                      $curl = curl_init();
 
