@@ -48,7 +48,7 @@ class LoginController extends Controller
     public function authenticated($request , $user){
          if($user->role_code != 'admin'){
             if ($user->status_ganti == null || $user->status_ganti == "") {
-                return redirect('reset/password/'.$user->username);
+                return redirect('reset/password/'.base64_encode($user->username));
             }else{
                 return redirect()->route('home');
             }
