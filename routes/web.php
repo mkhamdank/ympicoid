@@ -58,6 +58,7 @@ Route::get('/forgot/password', function () {
 Route::get('request/reset/password', 'PasswordController@requestResetPasswordWhatsapp');
 
 Route::get('reset/password/{id}', 'PasswordController@resetPassword');
+Route::get('reset/password/new/{id}', 'PasswordController@resetPasswordNew');
 // Route::post('request/reset/password', 'PasswordController@requestResetPassword');
 Route::post('reset/password/confirm', 'PasswordController@resetPasswordConfirm');
 

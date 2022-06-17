@@ -26,6 +26,11 @@ class PasswordController extends Controller
     	return view('auth.passwords.reset')->with('id',$id);
     }
 
+    public function resetPasswordNew($id)
+    {
+        return view('auth.passwords.reset')->with('id',base64_decode($id));
+    }
+
     public function requestResetPassword(Request $request)
     {
 		$cek = User::where('email',$request->get('email'))->first();
@@ -50,10 +55,10 @@ class PasswordController extends Controller
             if ($cekuser) {
                 $cekemp = DB::table('employee_syncs')->where('employee_id',strtoupper($request->get('employee_id')))->first();
                 if ($cekemp) {
-                    $new_pass = rand(10000000,99999999);
-                    $cekuser->password = bcrypt($new_pass);
-                    $cekuser->status_ganti = "";
-                    $cekuser->save();
+                    // $new_pass = rand(10000000,99999999);
+                    // $cekuser->password = bcrypt($new_pass);
+                    // $cekuser->status_ganti = "";
+                    // $cekuser->save();
 
                     if(substr($cekemp->phone, 0, 1) == '+' ){
                        $phone = substr($cekemp->phone, 1, 15);
@@ -65,8 +70,11 @@ class PasswordController extends Controller
                        $phone = $cekemp->phone;
                      }
 
-                            // $phone = '6285645896741';
-                     $messages = 'Permintaan Reset Password YMPI.CO.ID. Jangan Berikan Password Ini Kepada Siapapun, Termasuk ke Karyawan YMPI! Masuk ke Akun YMPI.CO.ID dengan password '.$new_pass.'.';
+                            // $phone = '6281132210003';
+                     // dengan password ".$new_pass."
+                     $nik = strtoupper($request->get('employee_id'));
+                     // $messages = "Permintaan Reset Password https://ympi.co.id. Jangan Berikan Password Ini Kepada Siapapun, Termasuk ke Karyawan YMPI! Masuk ke Akun https://ympi.co.id. Klik Link Berikut : http://ympi.co.id/ympicoid/public/reset/password/new/".base64_encode($nik);
+                     $messages = "Permintaan Reset Password YMPICOID. Abaikan pesan berikut jika ini bukan Anda! Klik Link Berikut Untuk Mengubah Password : http://ympi.co.id/ympicoid/public/reset/password/new/".base64_encode($nik);
 
                      $curl = curl_init();
 
