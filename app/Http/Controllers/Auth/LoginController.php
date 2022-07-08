@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\UserActivityLog;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -50,6 +51,13 @@ class LoginController extends Controller
             if ($user->status_ganti == null || $user->status_ganti == "") {
                 return redirect('reset/password/'.base64_encode($user->username));
             }else{
+                $activity = DB::table('user_activity_logs')->insert([
+                    'category' => 'Login',
+                    'detail' => 'Login',
+                    'created_by' => $user->id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ]);
                 return redirect()->route('home');
             }
         }else {

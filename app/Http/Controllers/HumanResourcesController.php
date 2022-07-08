@@ -28,6 +28,13 @@ class HumanResourcesController extends Controller
 	}
 
 	public function indexVaksin(){
+		$activity = DB::table('user_activity_logs')->insert([
+            'category' => 'Vaksin',
+            'detail' => 'Vaksin',
+            'created_by' => Auth::id(),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
 		$empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and end_date is null limit 1');
 
 		return view('human_resources.vaksin.index', array(
@@ -85,6 +92,14 @@ class HumanResourcesController extends Controller
 				]
 			);
 
+			$activity = DB::table('user_activity_logs')->insert([
+	            'category' => 'Vaksin',
+	            'detail' => 'Input Vaksin',
+	            'created_by' => Auth::id(),
+	            'created_at' => date('Y-m-d H:i:s'),
+	            'updated_at' => date('Y-m-d H:i:s'),
+	        ]);
+
 			$response = array(
 				'status' => true,
 			);
@@ -124,6 +139,14 @@ class HumanResourcesController extends Controller
 				'created_by' => 1,
 			]);
 
+			$activity = DB::table('user_activity_logs')->insert([
+	            'category' => 'Vaksin',
+	            'detail' => 'Input Vaksin Registration',
+	            'created_by' => Auth::id(),
+	            'created_at' => date('Y-m-d H:i:s'),
+	            'updated_at' => date('Y-m-d H:i:s'),
+	        ]);
+
 			$forms2 = VaksinSurvey::where('employee_id',$request->get('employee_id'))->update(
 				[
 					'call_vaksin_3' => $request->get('call_vaksin_3'),
@@ -145,6 +168,13 @@ class HumanResourcesController extends Controller
 
 	public function indexPkb()
 	{
+		$activity = DB::table('user_activity_logs')->insert([
+            'category' => 'PKB',
+            'detail' => 'PKB',
+            'created_by' => Auth::id(),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
 		$periode = PkbPeriode::where('status','Active')->first();
 		$pkb_question = PkbQuestion::where('periode',$periode->periode)->get();
 
@@ -165,6 +195,13 @@ class HumanResourcesController extends Controller
 	public function inputPkb(Request $request)
 	{
 		try {
+			$activity = DB::table('user_activity_logs')->insert([
+	            'category' => 'PKB',
+	            'detail' => 'Input PKB',
+	            'created_by' => Auth::id(),
+	            'created_at' => date('Y-m-d H:i:s'),
+	            'updated_at' => date('Y-m-d H:i:s'),
+	        ]);
 			$periode = $request->get('periode');
 			$employee_id = $request->get('employee_id');
 			$persetujuan = $request->get('persetujuan');
@@ -207,6 +244,13 @@ class HumanResourcesController extends Controller
 
 	public function indexKodeEtik()
 	{
+		$activity = DB::table('user_activity_logs')->insert([
+            'category' => 'Kode Etik',
+            'detail' => 'Kode Etik',
+            'created_by' => Auth::id(),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
 		$kode_etik_question = KodeEtikQuestion::get();
 		$cek_kode_etik = KodeEtikAnswer::where('employee_id',Auth::user()->username)->first();
 		$empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and end_date is null limit 1');
@@ -224,6 +268,13 @@ class HumanResourcesController extends Controller
 	public function inputKodeEtik(Request $request)
 	{
 		try {
+			$activity = DB::table('user_activity_logs')->insert([
+	            'category' => 'Kode Etik',
+	            'detail' => 'Input Kode Etik',
+	            'created_by' => Auth::id(),
+	            'created_at' => date('Y-m-d H:i:s'),
+	            'updated_at' => date('Y-m-d H:i:s'),
+	        ]);
 			$employee_id = $request->get('employee_id');
 			$question = $request->get('question');
 			$answer = $request->get('answer');
@@ -261,7 +312,13 @@ class HumanResourcesController extends Controller
 	}
 
 	public function mcu(){
-
+		$activity = DB::table('user_activity_logs')->insert([
+            'category' => 'MCU',
+            'detail' => 'MCU',
+            'created_by' => Auth::id(),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
         $title = 'Kuisioner Emergency';
         $title_jp = '';
 

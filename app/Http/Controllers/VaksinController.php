@@ -23,6 +23,13 @@ class VaksinController extends Controller
 {
     public function indexVaksin()
     {
+    	$activity = DB::table('user_activity_logs')->insert([
+            'category' => 'Vaksin',
+            'detail' => 'Vaksin',
+            'created_by' => Auth::id(),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
     	return view('vaksin');
     }
 
@@ -72,6 +79,7 @@ class VaksinController extends Controller
 	{
 		try {
 
+
         	$cek_input = db::select("select * from emergency_surveys 
         		where employee_id='".$request->get('employee_id')."' 
         		and keterangan = '".$request->get('keterangan')."'");
@@ -95,6 +103,13 @@ class VaksinController extends Controller
 	               'nama' => $request->get('nama'),
 	               'hubungan' => $request->get('hubungan'),
 	              ]);
+	            $activity = DB::table('user_activity_logs')->insert([
+		            'category' => 'Vaksin',
+		            'detail' => 'Input Vaksin',
+		            'created_by' => Auth::id(),
+		            'created_at' => date('Y-m-d H:i:s'),
+		            'updated_at' => date('Y-m-d H:i:s'),
+		        ]);
 
 	            $forms->save();
 

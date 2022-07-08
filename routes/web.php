@@ -30,7 +30,13 @@ Route::get('/', function () {
 		if (Auth::user()->role_code == 'admin') {
 			// // return view('admin/home');
 			// Route::get('admin/home', 'AdminController@index');
-
+			$activity = DB::table('user_activity_logs')->insert([
+	            'category' => 'Login',
+	            'detail' => 'Login Admin',
+	            'created_by' => Auth::user()->id,
+	            'created_at' => date('Y-m-d H:i:s'),
+	            'updated_at' => date('Y-m-d H:i:s'),
+	        ]);
             return redirect()->route('admin_home') ;
 			// return redirect()->action('EmployeeController@indexEmployeeService', ['id' => 1]);
 			// return \redirect()->route('emp_service', ['id' => 1, 'tahun' => date('Y')]);
@@ -39,6 +45,13 @@ Route::get('/', function () {
 			if (Auth::user()->status_ganti == "" || Auth::user()->status_ganti == null) {
 				return redirect('reset/password/'.Auth::user()->username);
 			}else{
+				$activity = DB::table('user_activity_logs')->insert([
+                    'category' => 'Login',
+                    'detail' => 'Login',
+                    'created_by' => Auth::user()->id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ]);
 				return redirect()->route('home');
 			}
 		}

@@ -26,6 +26,13 @@ class UserController extends Controller
     
     public function index()
     {
+      $activity = DB::table('user_activity_logs')->insert([
+          'category' => 'User',
+          'detail' => 'User',
+          'created_by' => Auth::id(),
+          'created_at' => date('Y-m-d H:i:s'),
+          'updated_at' => date('Y-m-d H:i:s'),
+      ]);
       $created_by = User::orderBy('name', 'ASC')
       ->get();
 
@@ -214,6 +221,13 @@ class UserController extends Controller
             $user->role_code = $request->get('role_code');
             $user->status_ganti = "";
             $user->save();
+            $activity = DB::table('user_activity_logs')->insert([
+                'category' => 'User',
+                'detail' => 'Update User '.$user->username,
+                'created_by' => Auth::id(),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
             return redirect('/index/user')->with('status', 'User data has been edited.')->with('page', 'User');
           }
           catch (QueryException $e){
@@ -238,6 +252,13 @@ class UserController extends Controller
           $user->role_code = $request->get('role_code');
           $user->status_ganti = "";
           $user->save();
+          $activity = DB::table('user_activity_logs')->insert([
+                'category' => 'User',
+                'detail' => 'Update User '.$user->username,
+                'created_by' => Auth::id(),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
           return redirect('/index/user')->with('status', 'User data has been edited.')->with('page', 'User');
         }
         catch (QueryException $e){

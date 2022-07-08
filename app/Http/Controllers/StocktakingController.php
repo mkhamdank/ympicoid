@@ -19,7 +19,13 @@ class StocktakingController extends Controller {
 
 
 	public function indexSurvey(){
-
+		$activity = DB::table('user_activity_logs')->insert([
+                'category' => 'Stocktaking',
+                'detail' => 'Stocktaking',
+                'created_by' => Auth::id(),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
 		$question = db::connection('ympimis_2')
 		->select("SELECT DISTINCT question, image FROM stocktaking_survey_questions
 			WHERE remark = 'stoctaking_survey'
@@ -84,7 +90,13 @@ class StocktakingController extends Controller {
 
 	public function inputSurvey(Request $request) {
 		try {
-
+			$activity = DB::table('user_activity_logs')->insert([
+                'category' => 'Stocktaking',
+                'detail' => 'Input Stocktaking',
+                'created_by' => Auth::id(),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
 			$now = date('Y-m-d H:i:s');
 			$calendar = db::connection('ympimis')
 			->table('stocktaking_calendars')

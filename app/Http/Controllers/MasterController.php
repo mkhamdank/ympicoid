@@ -28,7 +28,13 @@ class MasterController extends Controller
     }
 
     public function laporan_kesehatan(){
-
+        $activity = DB::table('user_activity_logs')->insert([
+            'category' => 'Laporan Kesehatan',
+            'detail' => 'Laporan Kesehatan',
+            'created_by' => Auth::id(),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
         $title = 'Laporan Kesehatan Karyawan';
         $title_jp = '';
 
@@ -44,6 +50,13 @@ class MasterController extends Controller
     public function input_laporan_kesehatan(Request $request)
     {
       try {
+        $activity = DB::table('user_activity_logs')->insert([
+            'category' => 'Laporan Kesehatan',
+            'detail' => 'Input Laporan Kesehatan',
+            'created_by' => Auth::id(),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
         $quiz = $request->get('question');
         $answer = $request->get('answer');
 
@@ -80,6 +93,13 @@ class MasterController extends Controller
     }
 
     public function survey_covid(){
+        $activity = DB::table('user_activity_logs')->insert([
+            'category' => 'Survey Covid',
+            'detail' => 'Survey Covid',
+            'created_by' => Auth::id(),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
         $question = db::select("select distinct pertanyaan from health_surveys where remark = 'covid' and deleted_at is null");
         $empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and end_date is null LIMIT 1');
 
@@ -93,6 +113,13 @@ class MasterController extends Controller
     public function input_survey_covid(Request $request)
     {
         try {
+            $activity = DB::table('user_activity_logs')->insert([
+                'category' => 'Survey Covid',
+                'detail' => 'Input Survey Covid',
+                'created_by' => Auth::id(),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
             $quiz = $request->get('question');
             $answer = $request->get('answer');
             $jumlah_pertanyaan = $request->get('jumlah_pertanyaan_survey');
@@ -219,7 +246,13 @@ class MasterController extends Controller
         }
     }
     public function emergency(){
-
+        $activity = DB::table('user_activity_logs')->insert([
+            'category' => 'Emergency',
+            'detail' => 'Emergency',
+            'created_by' => Auth::id(),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
         $title = 'Kuisioner Emergency';
         $title_jp = '';
 
@@ -235,7 +268,6 @@ class MasterController extends Controller
     public function postEmergency(Request $request)
     {
         try {
-
             $cek_input = db::select("select * from emergency_surveys where employee_id='".$request->get('employee_id')."' 
                 and keterangan = '".$request->get('keterangan')."'");
 
@@ -257,6 +289,14 @@ class MasterController extends Controller
                     'keterangan' => $request->get('keterangan'),
                     'nama' => $request->get('nama'),
                     'hubungan' => $request->get('hubungan'),
+                ]);
+
+                $activity = DB::table('user_activity_logs')->insert([
+                    'category' => 'Emergency',
+                    'detail' => 'Input Emergency',
+                    'created_by' => Auth::id(),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                 ]);
 
                 $forms->save();
@@ -289,6 +329,13 @@ class MasterController extends Controller
     }
 
     public function DataKomunikasi(){
+        $activity = DB::table('user_activity_logs')->insert([
+            'category' => 'Data Komunikasi',
+            'detail' => 'Data Komunikasi',
+            'created_by' => Auth::id(),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
 
         $title = 'Data Komunikasi Lebaran';
         $title_jp = '';
@@ -375,6 +422,14 @@ class MasterController extends Controller
                 // 'rencana_mudik' => $request->get('rencana_mudik'),
                 // 'tanggal_berangkat' => $request->get('tanggal_berangkat'),
                 // 'tanggal_kembali' => $request->get('tanggal_kembali')
+
+            $activity = DB::table('user_activity_logs')->insert([
+                'category' => 'Data Komunikasi',
+                'detail' => 'Input Data Komunikasi',
+                'created_by' => Auth::id(),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
         
 
             $forms = EmployeeCommunication::firstOrNew(['employee_id' => $request->get('employee_id')]);

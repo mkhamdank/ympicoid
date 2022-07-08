@@ -110,11 +110,26 @@ class PasswordController extends Controller
                     ));
                      curl_exec($curl);
 
+                    $activity = DB::table('user_activity_logs')->insert([
+                        'category' => 'Reset Password',
+                        'detail' => 'Request Reset Password Successful',
+                        'created_by' => $cekuser->id,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
+                    ]);
+
                     $response = array(
                         'status' => true,
                     );
                     return Response::json($response);
                 }else{
+                    $activity = DB::table('user_activity_logs')->insert([
+                        'category' => 'Error',
+                        'detail' => 'Request Reset Password Employee Not Match',
+                        'created_by' => $cekuser->id,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
+                    ]);
                     $response = array(
                         'status' => false,
                         'message' => 'Karyawan Tidak Ditemukan'
@@ -151,17 +166,35 @@ class PasswordController extends Controller
 
     public function resetPasswordConfirm(Request $request)
     {
+        $user = User::where('username',$request->get('id'))->first();
     	$password = $request->get('password');
     	$password_confirm = $request->get('password_confirm');
     	if ($password == $password_confirm) {
     		if ($request->get('validation') > 0) {
+                $activity = DB::table('user_activity_logs')->insert([
+                    'category' => 'Error',
+                    'detail' => 'Reset Password Invalid',
+                    'created_by' => $user->id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ]);
     			return back()->with('error', "Please Follow Rule Password");
     		}else{
     			$user = User::where('username',$request->get('id'))->first();
 	    		$user->password = bcrypt($request->get('password'));
 	            $user->status_ganti = date('Y-m-d H:i:s');
                 $user->token_ganti = '';
-	    		$user->save();
+
+                $activity = DB::table('user_activity_logs')->insert([
+                    'category' => 'Reset Password',
+                    'detail' => 'Reset Password Successful',
+                    'created_by' => $user->id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ]);
+
+                $user->save();
+
 	    		// return redirect('')->with('success','Reset password was successful.');
                 // return redirect()->route('logout');
                 Auth::logout();
@@ -170,6 +203,13 @@ class PasswordController extends Controller
     		}
     		
     	}else{
+            $activity = DB::table('user_activity_logs')->insert([
+                'category' => 'Error',
+                'detail' => 'Password does not match.',
+                'created_by' => $user->id,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
     		return back()->with('error', "Password doesn't match.");
     	}
     }
