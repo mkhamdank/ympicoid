@@ -112,6 +112,13 @@ class SyncSunfishMobile extends Command
                   'created_by' => '1'
               ]);
               $insert_user->save();
+          }else{
+            if(!is_null($data->end_date)){
+                $update_users = User::where('username', $data->Emp_no)
+                ->update([
+                    'deleted_at' => $data->end_date.' '.date('H:i:s')
+                ]);
+            }
           }
       }
     }
