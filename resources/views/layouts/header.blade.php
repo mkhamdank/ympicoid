@@ -25,12 +25,12 @@
                                 <i class="fa fa-heartbeat"></i> Survey Covid
                             </a>
                         </li>
-                        <li style="background-color:#fff">
+                       <!--  <li style="background-color:#fff">
                            <a href="{{ url('data_komunikasi') }}" 
                                 @if(isset($page) && $page == "Data Komunikasi") class="active" @endif>
                                 <i class="fa fa-phone"></i> Data Komunikasi
                             </a>
-                        </li>
+                        </li> -->
                         <li style="background-color:#fff">
                              <a href="{{ url('vaksin') }}" 
                                 @if(isset($page) && $page == "Vaksin") class="active" @endif>
@@ -53,19 +53,18 @@
                                 <i class="fa fa-users"></i> Survey Stocktaking
                             </a>
                         </li>
-                        <li style="background-color:#fff">
+                        <!-- <li style="background-color:#fff">
                            <a href="{{ url('emergency') }}" 
                                 @if(isset($page) && $page == "Kuisioner Emergency") class="active" @endif>
                                 <i class="fa fa-tty"></i> Kuisioner Emergency
                             </a>
-                        </li>
-                        <li style="background-color:#fff">
+                        </li> -->
+                        <!-- <li style="background-color:#fff">
                            <a href="{{ url('mcu') }}" 
                                 @if(isset($page) && $page == "Kuisioner MCU") class="active" @endif>
                                 <i class="fa fa-plus"></i> Hasil MCU
                             </a>
-                        </li>
-
+                        </li> -->
                         <li style="background-color:#fff">
                             <a href="{{ url('training_filosofi') }}" @if(isset($page) && $page == "Kode Etik") class="active" @endif>
                                 <i class="fa fa-book"></i> Training Filosofi Yamaha
