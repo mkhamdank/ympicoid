@@ -65,6 +65,13 @@
                         <!-- <span>Seberapa Mengerti Anda Mengenai Stocktaking di YMPI</span> -->
                     </a>
                 </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
+                    <a href="{{ url('training_filosofi') }}"  class="mini-box"  style="margin-bottom:20px">
+                        <i><img src="{{ asset('images/filosofi_n.png')}}" alt="" height="50"></i>
+                        <strong style="font-size:12px">Training <br>Filosofi Yamaha</strong>
+                        <!-- <span>Post Test Mengenai Pemahaman COC (Code Of Conduct)</span> -->
+                    </a>
+                </div>
                <!--  <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
                     <a href="{{ url('emergency') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/emergency1.png')}}" alt="" height="50"></i>

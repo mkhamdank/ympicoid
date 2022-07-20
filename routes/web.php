@@ -166,6 +166,10 @@ Route::get('pkb/input', 'HumanResourcesController@inputPkb');
 Route::get('kode_etik', 'HumanResourcesController@indexKodeEtik');
 Route::get('kodeetik/input', 'HumanResourcesController@inputKodeEtik');
 
+Route::get('training_filosofi', 'HumanResourcesController@indexTrainingFilos');
+Route::get('training_filosofi/input', 'HumanResourcesController@inpuTrFilosofi');
+
+
 Route::get('index/survey_stocktaking', 'StocktakingController@indexSurvey');
 Route::get('fetch/check_survey_stocktaking', 'StocktakingController@fetchSurvey');
 Route::post('input/survey_stocktaking', 'StocktakingController@inputSurvey');

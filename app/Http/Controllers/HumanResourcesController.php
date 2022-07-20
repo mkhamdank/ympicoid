@@ -19,6 +19,8 @@ use App\KodeEtikAnswer;
 use App\VaksinRegisterNew;
 use App\VaksinSurvey;
 use App\McuSurvey;
+use App\TrFilosofiQuestion;
+use App\TrFilosofiAnswer;
 
 class HumanResourcesController extends Controller
 {
@@ -310,6 +312,62 @@ class HumanResourcesController extends Controller
 			return Response::json($response);
 		}
 	}
+
+		public function indexTrainingFilos()
+	{
+
+		$tr_filos_question = TrFilosofiQuestion::get();
+		$check_emp_tr = TrFilosofiAnswer::where('employee_id',Auth::user()->username)->first();
+		$empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and end_date is null limit 1');
+
+		return view('human_resources.training_filosofi.training_filos_index', array(
+			'tr_filos_question' => $tr_filos_question,
+			'tgl' => date('Y-m-d H:i:s'),
+			'check_emp_tr' => $check_emp_tr,
+			'empsync' => $empsync,
+			'page' => 'Training Filosofi Yamaha'
+		));
+	}
+
+		public function inpuTrFilosofi(Request $request)
+	{
+		try {
+			$employee_id = $request->get('employee_id');
+			$question = $request->get('question');
+			$answer = $request->get('answer');
+			$TrCheck = TrFilosofiAnswer::where('employee_id',$employee_id)->first();
+
+			if (count($TrCheck) > 0) {
+				$response = array(
+					'status' => false,
+					'datas' => 'Anda sudah pernah Melakukan Training Filosofi Yamaha'
+				);
+				return Response::json($response);	
+			}else{
+				$kode_etik = TrFilosofiAnswer::create([
+					'employee_id' => $employee_id,
+					'question' => join('_',$question),
+					'answer' => join('_',$answer),
+					'created_by' => 1,
+				]);
+				$kode_etik->save();
+				$response = array(
+					'status' => true,
+					'datas' => 'Berhasil Disimpan',
+					'datetime' => date('Y-m-d H:i:s')
+
+				);
+				return Response::json($response);
+			}
+		} catch (\Exception $e) {
+			$response = array(
+				'status' => false,
+				'datas' => $e->getMessage()
+			);
+			return Response::json($response);
+		}
+	}
+
 
 	public function mcu(){
 		$activity = DB::table('user_activity_logs')->insert([
