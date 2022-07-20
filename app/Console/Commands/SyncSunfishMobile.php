@@ -116,7 +116,7 @@ class SyncSunfishMobile extends Command
             if(!is_null($data->end_date)){
                 $update_users = User::where('username', $data->Emp_no)
                 ->update([
-                    'deleted_at' => $data->end_date.' '.date('H:i:s')
+                    'deleted_at' => date('Y-m-d H:i:s',strtotime($data->end_date))
                 ]);
             }
           }
