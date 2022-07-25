@@ -168,6 +168,8 @@ Route::get('kodeetik/input', 'HumanResourcesController@inputKodeEtik');
 
 Route::get('training_filosofi', 'HumanResourcesController@indexTrainingFilos');
 Route::get('training_filosofi/input', 'HumanResourcesController@inpuTrFilosofi');
+Route::get('update/status', 'HumanResourcesController@updateTrFilososiOpen');
+
 
 
 Route::get('index/survey_stocktaking', 'StocktakingController@indexSurvey');

@@ -225,7 +225,6 @@
             <div class="col-lg-12" style="margin-top:20px;">
                 <div class="center-heading">
                     <h2 class="section-title" style="background-color:#955ddf;color:white;margin-bottom: 0px;border-top-left-radius: 10px;border-top-right-radius: 10px;font-size: 15px">TRAINING FILOSOFI YAMAHA</h2>
-                    <!-- <h4 class="section-title" style="background-color: white;font-size: 12px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;margin-bottom: 10px"><?= $empsync[0]->employee_id ?> - <?= $empsync[0]->name ?></h4> -->
                     <h4 class="section-title" style="background-color: white;font-size: 12px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;margin-bottom: 10px">PERIODE 2021-2022</h4>
                     <input type="hidden" name="employee_id" id="employee_id" value="{{$empsync[0]->employee_id}}">
                     <input type="hidden" name="name" id="name" value="{{$empsync[0]->name}}">
@@ -234,7 +233,7 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     {{ csrf_field() }}
                     <input type="hidden" name="periode" id="periode" value="">
-                    <center id="title_pertanyaan">
+                    <center id="title_pertanyaan" style="display: none;">
                         <span class="center-heading" style="padding-bottom: 15px;text-align: center;font-weight: bold;font-size: 18px">
                             PERTANYAAN
                         </span>
@@ -247,7 +246,7 @@
                             @foreach($tr_filos_question as $tr_filos_question)
 
                             <div id="div_tr_question_<?= $no ?>" style="display: none;width: 100%;padding: 15px;" class="col-xs-12">
-                               <?php if ($no > 2): ?>
+                             <?php if ($no > 2): ?>
                                 <span style="font-weight: bold;font-size: 14px">Pilihlah jawaban “BENAR” atau “SALAH” pada setiap pertanyaan berikut</span><br>
                             <?php endif ?>
                             <label class="label-input1002" style="color: purple;margin-top: 0px;font-size: 14px"><span id="TrFilos_question_<?= $no ?>">{{$no+1}}. {{ $tr_filos_question->question }}</span></label>
@@ -281,7 +280,7 @@
                             </center>
                             <br>
                             <?php if ($no < 3): ?>
-                               <center><span style="font-weight: bold;font-size: 20px">Jawaban yang benar adalah</span><br>
+                             <center><span style="font-weight: bold;font-size: 20px">Jawaban yang benar adalah</span><br>
                                 <span><?php echo $tr_filos_question->right_answer ?></span>
                             </center>
                         <?php endif ?>
@@ -309,7 +308,7 @@
                             <i class="fa fa-arrow-right"></i>
                         </span>
                     </button>
-                    <button class="main-button" type="button" id="btn_tr_back_<?= $no ?>" onclick="backTrFilosQuestion('{{$no}}')" style="display: inline-block;float: right;display: none;background-color: red;margin: 20px">
+                    <button class="main-button" type="button" id="btn_tr_back_<?= $no ?>" onclick="backTrFilosQuestion('{{$no}}')" style="display: inline-block; float: right;display: none; background-color: red;margin: 20px">
                         <span>
                             <i class="fa fa-arrow-left"></i>
                             Back
@@ -340,8 +339,48 @@
                         </button>
                     </div>
                 </div>
+                <div id="status_open" style="width: 100%; display:none;">
+                    <div class="col-xs-12 col-md-12">
+                        <center><span id="images_nova_<?= $no ?>"><img src='../public/images/maintenances.png' style="width: 30vh;"></span>
+                        </center>
+                        <br>
+                        <center id="pernyataan_status" style="font-size:16px">Hai <?= Auth::user()->name ?><br>Training Filosofi Yamaha Masih Belum Dibuka</center>
+
+                        <center id="pernyataan_status_open" style="font-size:16px;display: none;">Hai <?= Auth::user()->name ?><br>Training Filosofi Yamaha Sudah Dibuka</center>
+
+                        <?php if ($empsync[0]->employee_id == "PI2101043" || $empsync[0]->employee_id == "PI1110002"): ?>
+                            <br>
+                            <center>
+                                <button class="main-button" type="button" id="btn_open_back" onclick="TrFilosOpen('close')" style="display: inline-block;display: none;margin: 20px;background-color: red;">
+                                    <span>
+                                        <i class="fa fa-arrow-left"></i>
+                                        Close
+                                    </span>
+                                </button>
+                                <button class="main-button" type="button" id="btn_open" onclick="TrFilosOpen('open')" style="display: inline-block;display: none;margin: 20px">
+                                    <span>
+                                        Open
+                                        <i class="fa fa-arrow-right"></i>
+                                    </span>
+                                </button>
+
+                                <button class="main-button" type="button" id="btn_open_next" onclick="TrFilosNext()" style="display: inline-block;display: none;margin: 20px">
+                                    <span>
+                                        Next
+                                        <i class="fa fa-arrow-right"></i>
+                                    </span>
+                                </button>
+
+
+                            </center>
+
+                        <?php endif ?>
+
+
+                    </div>
+                </div>
             </div>
-            <div id="div_detail_belum" style="margin-top: 20px">
+            <div id="div_detail_belum" style="margin-top: 20px;display:none">
                 <center><span style="font-size: 18px;text-align: center;font-weight: bold;">
                     <?php date_default_timezone_set('Asia/Jakarta'); ?>
                     Maaf, fitur ini masih dalam pengembangan.
@@ -349,7 +388,7 @@
             </div>
 
             <div id="div_detail_sudah" style="margin-top: 20px">
-               <center>
+             <center>
                 <div><img src='../public/images/kode_etik/Thanks_veno.png' width='35%'></div> 
             </center>
             <br>
@@ -385,159 +424,237 @@
     });
 
     jQuery(document).ready(function() {
-        for(var i = 0; i < parseInt('{{$tr_filos_question_total}}');i++){
-            var name= 'TrFilos_answer_'+i;
-            $('#'+name).prop('checked', false);
-        }
-        $('#div_tr_question_0').hide();
-        $('#btn_tr_next_awal').show();
-        $('#title_sambutan').show();
-        $('#title_pertanyaan').hide();
-        $('#surat_pernyataan').hide();
-        $('#div_detail_sudah').hide();
-        $('#div_detail_belum').hide();
-        $('#sudah_kode_etik').hide();
-        $('#nama').html('{{$empsync[0]->name}}');
-        $('#nama_bawah').html('{{$empsync[0]->name}}');
-        $('#nik').html('{{$empsync[0]->employee_id}}');
-        $('#grade').html('{{$empsync[0]->grade_code}}');
-        $('#jabatan').html('{{$empsync[0]->position}}');
 
-        if (parseInt('{{count($check_emp_tr)}}') > 0) {
-            $('#title_sambutan').hide();
-            $('#div_detail_sudah').show();
-            $('#surat_pernyataan').hide();
-            $('#div_tr_question_0').hide();
-            $('#btn_tr_submit_0').hide();
+
+        if (parseInt('{{count($tr_status)}}') > 0) {
+
+           if ('{{$empsync[0]->employee_id}}' == "PI2101043" || '{{$empsync[0]->employee_id}}' == "PI1110002") {
             $('#title_pertanyaan').hide();
-        }
-    });
-
-    function submitTrFilosQuestion(no) {
-
-        var answer = '';
-        $("input[name='TrFilos_answer_"+no+"']:checked").each(function (i) {
-            answer = $(this).val();
-        });
-        if (answer != $("#Tr_Filos_right_answer_"+no).val()) {
-            $('#tr_status_'+no).html('Jawaban Anda Salah!<br>Silahkan baca jawaban benar.');
-            $('#tr_status_'+no).css("color", "red");
-            $('#tr_status_'+no).css("fontWeight", "bold");
-            $('#div_tr_discussion_'+no).show();
-            $('#btn_tr_back_'+no).show();
-            $('#images_'+no).hide();
-            $('#images_not_'+no).show();
-            $('#btn_tr_submit_'+no).hide();
-            $('#div_tr_question_'+no).hide();
-            $('#st_answer_4').show();
-            $('#st_answer_5').show();
-
+            $('#div_detail_belum').hide();
+            $('#div_detail_sudah').hide();
+            $('#status_open').show();
+            $('#btn_open').hide();
+            $('#btn_open_back').show();
+            $('#btn_open_next').show();
+            $('#pernyataan_status').hide();
+            $('#pernyataan_status_open').show();
         }else{
-            $('#tr_status_'+no).html('Jawaban Anda Benar!');
-            $('#tr_status_'+no).css("color", "green");
-            $('#tr_status_'+no).css("fontWeight", "bold");
-            $('#div_tr_discussion_'+no).show();
-            $('#images_not_'+no).hide();
-            $('#images_'+no).show();
-            $('#btn_tr_filos_next_'+no).show();
-            $('#btn_tr_submit_'+no).hide();
-            $('#div_tr_question_'+no).hide();
-            $('#st_answer_4').hide();
-            $('#st_answer_5').hide();
+            for(var i = 0; i < parseInt('{{$tr_filos_question_total}}');i++){
+                var name= 'TrFilos_answer_'+i;
+                $('#'+name).prop('checked', false);
+            }
+            $('#div_tr_question_0').hide();
+            $('#btn_tr_next_awal').show();
+            $('#status_open').hide();
+            $('#btn_open_next').hide();
+            $('#title_sambutan').show();
+            $('#title_pertanyaan').hide();
+            $('#surat_pernyataan').hide();
+            $('#div_detail_sudah').hide();
+            $('#div_detail_belum').hide();
+            $('#sudah_kode_etik').hide();
+            $('#nama').html('{{$empsync[0]->name}}');
+            $('#nama_bawah').html('{{$empsync[0]->name}}');
+            $('#nik').html('{{$empsync[0]->employee_id}}');
+            $('#grade').html('{{$empsync[0]->grade_code}}');
+            $('#jabatan').html('{{$empsync[0]->position}}');
+
+            if (parseInt('{{count($check_emp_tr)}}') > 0) {
+                $('#status_open').hide();
+                $('#title_sambutan').hide();
+                $('#div_detail_sudah').show();
+                $('#surat_pernyataan').hide();
+                $('#div_tr_question_0').hide();
+                $('#btn_tr_submit_0').hide();
+                $('#title_pertanyaan').hide();
+            }
         }
+
+    }else{
+
+        $('#title_pertanyaan').hide();
+        $('#div_detail_belum').hide();
+        $('#div_detail_sudah').hide();
+        $('#status_open').show();
+        $('#btn_open').show();
+        $('#btn_open_back').hide();
+        $('#btn_open_next').hide();
+
     }
+});
 
-    function backTrFilosQuestion(no) {
-        $('#tr_status_'+no).html('');
-        $('#tr_status_'+no).css("color", "white");
-        $('#btn_tr_back_'+no).hide();
-        $('#div_tr_discussion_'+no).hide();
-        $('#btn_tr_submit_'+no).show();
-        $('#div_tr_question_'+no).show();
-    }
+    function TrFilosNext() {
 
+       $('#div_tr_question_0').hide();
+       $('#btn_tr_next_awal').show();
+       $('#status_open').hide();
+       $('#btn_open_next').hide();
+       $('#title_sambutan').show();
+       $('#title_pertanyaan').hide();
+       $('#surat_pernyataan').hide();
+       $('#div_detail_sudah').hide();
+       $('#div_detail_belum').hide();
+       $('#sudah_kode_etik').hide();
+       $('#nama').html('{{$empsync[0]->name}}');
+       $('#nama_bawah').html('{{$empsync[0]->name}}');
+       $('#nik').html('{{$empsync[0]->employee_id}}');
+       $('#grade').html('{{$empsync[0]->grade_code}}');
+       $('#jabatan').html('{{$empsync[0]->position}}');
 
-    function nextTrFilosAwal() {
-        $('#btn_tr_next_awal').hide();
+       if (parseInt('{{count($check_emp_tr)}}') > 0) {
+        $('#status_open').hide();
         $('#title_sambutan').hide();
-        $('#div_tr_question_0').show();
-        $('#btn_tr_submit_0').show();
+        $('#div_detail_sudah').show();
+        $('#surat_pernyataan').hide();
+        $('#div_tr_question_0').hide();
+        $('#btn_tr_submit_0').hide();
+        $('#title_pertanyaan').hide();
     }
 
-    function nextTrFilosQuestion(no) {
-        $('#tr_status_'+no).html('');
-        $('#tr_status_'+no).css("color", "white");
-        $('#btn_tr_back_'+no).hide();
-        $('#btn_tr_filos_next_'+no).hide();
-        $('#div_tr_discussion_'+no).hide();
+}
+
+function submitTrFilosQuestion(no) {
+
+    var answer = '';
+    $("input[name='TrFilos_answer_"+no+"']:checked").each(function (i) {
+        answer = $(this).val();
+    });
+    if (answer != $("#Tr_Filos_right_answer_"+no).val()) {
+        $('#tr_status_'+no).html('Jawaban Anda Salah!<br>Silahkan baca jawaban benar.');
+        $('#tr_status_'+no).css("color", "red");
+        $('#tr_status_'+no).css("fontWeight", "bold");
+        $('#div_tr_discussion_'+no).show();
+        $('#btn_tr_back_'+no).show();
+        $('#images_'+no).hide();
+        $('#images_not_'+no).show();
         $('#btn_tr_submit_'+no).hide();
         $('#div_tr_question_'+no).hide();
+        $('#st_answer_4').show();
+        $('#st_answer_5').show();
 
-        $('#btn_tr_submit_'+(parseInt(no)+1)).show();
-        $('#div_tr_question_'+(parseInt(no)+1)).show();
+    }else{
+        $('#tr_status_'+no).html('Jawaban Anda Benar!');
+        $('#tr_status_'+no).css("color", "green");
+        $('#tr_status_'+no).css("fontWeight", "bold");
+        $('#div_tr_discussion_'+no).show();
+        $('#images_not_'+no).hide();
+        $('#images_'+no).show();
+        $('#btn_tr_filos_next_'+no).show();
+        $('#btn_tr_submit_'+no).hide();
+        $('#div_tr_question_'+no).hide();
+        $('#st_answer_4').hide();
+        $('#st_answer_5').hide();
+    }
+}
 
-        if ((parseInt(no)+1) == '{{$tr_filos_question_total}}') {
+function backTrFilosQuestion(no) {
+    $('#tr_status_'+no).html('');
+    $('#tr_status_'+no).css("color", "white");
+    $('#btn_tr_back_'+no).hide();
+    $('#div_tr_discussion_'+no).hide();
+    $('#btn_tr_submit_'+no).show();
+    $('#div_tr_question_'+no).show();
+}
 
-            $('#div_pertanyaan').hide();
-            $('#surat_pernyataan').hide();
-            $('#title_pertanyaan').hide();
 
-            var question = [];
-            var answers = [];
+function nextTrFilosAwal() {
+    $('#btn_tr_next_awal').hide();
+    $('#title_sambutan').hide();
+    $('#div_tr_question_0').show();
+    $('#btn_tr_submit_0').show();
+}
+
+function nextTrFilosQuestion(no) {
+    $('#tr_status_'+no).html('');
+    $('#tr_status_'+no).css("color", "white");
+    $('#btn_tr_back_'+no).hide();
+    $('#btn_tr_filos_next_'+no).hide();
+    $('#div_tr_discussion_'+no).hide();
+    $('#btn_tr_submit_'+no).hide();
+    $('#div_tr_question_'+no).hide();
+
+    $('#btn_tr_submit_'+(parseInt(no)+1)).show();
+    $('#div_tr_question_'+(parseInt(no)+1)).show();
+
+    if ((parseInt(no)+1) == '{{$tr_filos_question_total}}') {
+
+        $('#div_pertanyaan').hide();
+        $('#surat_pernyataan').hide();
+        $('#title_pertanyaan').hide();
+
+        var question = [];
+        var answers = [];
 
 
-            for(var i = 0; i < parseInt('{{$tr_filos_question_total}}');i++){
-                var answer = '';
-                $("input[name='TrFilos_answer_"+i+"']:checked").each(function (i) {
-                    answer = $(this).val();
-                });
-                answers.push(answer);
-                question.push($('#TrFilos_question_'+i).html());
-            }
-
-            var data = {
-                employee_id : $('#employee_id').val(),
-                question:question,
-                answer:answers
-            }
-
-            $.get('{{ url("training_filosofi/input") }}', data, function(result, status, xhr){
-                if(result.status == true){    
-                    $("#loading").hide();
-                    openSuccessGritter("Success","Berhasil Disimpan");
-                    $("#tanggal_tr_filos").html(result.datetime);
-                    $('#div_detail_sudah').show();
-                }
-                else {
-                    $("#loading").hide();
-                    openErrorGritter('Error!', result.datas);
-                }
-            })
-
+        for(var i = 0; i < parseInt('{{$tr_filos_question_total}}');i++){
+            var answer = '';
+            $("input[name='TrFilos_answer_"+i+"']:checked").each(function (i) {
+                answer = $(this).val();
+            });
+            answers.push(answer);
+            question.push($('#TrFilos_question_'+i).html());
         }
+
+        var data = {
+            employee_id : $('#employee_id').val(),
+            question:question,
+            answer:answers
+        }
+
+        $.get('{{ url("training_filosofi/input") }}', data, function(result, status, xhr){
+            if(result.status == true){    
+                $("#loading").hide();
+                openSuccessGritter("Success","Berhasil Disimpan");
+                $("#tanggal_tr_filos").html(result.datetime);
+                $('#div_detail_sudah').show();
+            }
+            else {
+                $("#loading").hide();
+                openErrorGritter('Error!', result.datas);
+            }
+        })
+
+    }
+}
+
+function TrFilosOpen(st) {    
+    var data = {
+        status:st
     }
 
-    
-    function openSuccessGritter(title, message){
-        jQuery.gritter.add({
-            title: title,
-            text: message,
-            class_name: 'growl-success',
-            image: '{{ url("images/image-screen.png") }}',
-            sticky: false,
-            time: '2000'
-        });
-    }
+    $.get('{{ url("update/status") }}', data, function(result, status, xhr){
+        if(result.status == true){    
+            openSuccessGritter("Success","Berhasil Diupdate");
+            location.reload();
+        }
+        else {
+            $("#loading").hide();
+            openErrorGritter('Error!', "Error");
+        }
+    })
+}
 
-    function openErrorGritter(title, message) {
-        jQuery.gritter.add({
-            title: title,
-            text: message,
-            class_name: 'growl-danger',
-            image: '{{ url("images/image-stop.png") }}',
-            sticky: false,
-            time: '2000'
-        });
-    }
+
+function openSuccessGritter(title, message){
+    jQuery.gritter.add({
+        title: title,
+        text: message,
+        class_name: 'growl-success',
+        image: '{{ url("images/image-screen.png") }}',
+        sticky: false,
+        time: '2000'
+    });
+}
+
+function openErrorGritter(title, message) {
+    jQuery.gritter.add({
+        title: title,
+        text: message,
+        class_name: 'growl-danger',
+        image: '{{ url("images/image-stop.png") }}',
+        sticky: false,
+        time: '2000'
+    });
+}
 </script>
 @stop

@@ -31,12 +31,12 @@ class HumanResourcesController extends Controller
 
 	public function indexVaksin(){
 		$activity = DB::table('user_activity_logs')->insert([
-            'category' => 'Vaksin',
-            'detail' => 'Vaksin',
-            'created_by' => Auth::id(),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+			'category' => 'Vaksin',
+			'detail' => 'Vaksin',
+			'created_by' => Auth::id(),
+			'created_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s'),
+		]);
 		$empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and end_date is null limit 1');
 
 		return view('human_resources.vaksin.index', array(
@@ -95,12 +95,12 @@ class HumanResourcesController extends Controller
 			);
 
 			$activity = DB::table('user_activity_logs')->insert([
-	            'category' => 'Vaksin',
-	            'detail' => 'Input Vaksin',
-	            'created_by' => Auth::id(),
-	            'created_at' => date('Y-m-d H:i:s'),
-	            'updated_at' => date('Y-m-d H:i:s'),
-	        ]);
+				'category' => 'Vaksin',
+				'detail' => 'Input Vaksin',
+				'created_by' => Auth::id(),
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s'),
+			]);
 
 			$response = array(
 				'status' => true,
@@ -142,12 +142,12 @@ class HumanResourcesController extends Controller
 			]);
 
 			$activity = DB::table('user_activity_logs')->insert([
-	            'category' => 'Vaksin',
-	            'detail' => 'Input Vaksin Registration',
-	            'created_by' => Auth::id(),
-	            'created_at' => date('Y-m-d H:i:s'),
-	            'updated_at' => date('Y-m-d H:i:s'),
-	        ]);
+				'category' => 'Vaksin',
+				'detail' => 'Input Vaksin Registration',
+				'created_by' => Auth::id(),
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s'),
+			]);
 
 			$forms2 = VaksinSurvey::where('employee_id',$request->get('employee_id'))->update(
 				[
@@ -171,12 +171,12 @@ class HumanResourcesController extends Controller
 	public function indexPkb()
 	{
 		$activity = DB::table('user_activity_logs')->insert([
-            'category' => 'PKB',
-            'detail' => 'PKB',
-            'created_by' => Auth::id(),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+			'category' => 'PKB',
+			'detail' => 'PKB',
+			'created_by' => Auth::id(),
+			'created_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s'),
+		]);
 		$periode = PkbPeriode::where('status','Active')->first();
 		$pkb_question = PkbQuestion::where('periode',$periode->periode)->get();
 
@@ -198,12 +198,12 @@ class HumanResourcesController extends Controller
 	{
 		try {
 			$activity = DB::table('user_activity_logs')->insert([
-	            'category' => 'PKB',
-	            'detail' => 'Input PKB',
-	            'created_by' => Auth::id(),
-	            'created_at' => date('Y-m-d H:i:s'),
-	            'updated_at' => date('Y-m-d H:i:s'),
-	        ]);
+				'category' => 'PKB',
+				'detail' => 'Input PKB',
+				'created_by' => Auth::id(),
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s'),
+			]);
 			$periode = $request->get('periode');
 			$employee_id = $request->get('employee_id');
 			$persetujuan = $request->get('persetujuan');
@@ -247,12 +247,12 @@ class HumanResourcesController extends Controller
 	public function indexKodeEtik()
 	{
 		$activity = DB::table('user_activity_logs')->insert([
-            'category' => 'Kode Etik',
-            'detail' => 'Kode Etik',
-            'created_by' => Auth::id(),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+			'category' => 'Kode Etik',
+			'detail' => 'Kode Etik',
+			'created_by' => Auth::id(),
+			'created_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s'),
+		]);
 		$kode_etik_question = KodeEtikQuestion::get();
 		$cek_kode_etik = KodeEtikAnswer::where('employee_id',Auth::user()->username)->first();
 		$empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and end_date is null limit 1');
@@ -271,12 +271,12 @@ class HumanResourcesController extends Controller
 	{
 		try {
 			$activity = DB::table('user_activity_logs')->insert([
-	            'category' => 'Kode Etik',
-	            'detail' => 'Input Kode Etik',
-	            'created_by' => Auth::id(),
-	            'created_at' => date('Y-m-d H:i:s'),
-	            'updated_at' => date('Y-m-d H:i:s'),
-	        ]);
+				'category' => 'Kode Etik',
+				'detail' => 'Input Kode Etik',
+				'created_by' => Auth::id(),
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s'),
+			]);
 			$employee_id = $request->get('employee_id');
 			$question = $request->get('question');
 			$answer = $request->get('answer');
@@ -313,14 +313,15 @@ class HumanResourcesController extends Controller
 		}
 	}
 
-		public function indexTrainingFilos()
+	public function indexTrainingFilos()
 	{
-
+		$tr_status = TrFilosofiQuestion::select('status')->where('status',1)->first();
 		$tr_filos_question = TrFilosofiQuestion::get();
 		$check_emp_tr = TrFilosofiAnswer::where('employee_id',Auth::user()->username)->first();
 		$empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and end_date is null limit 1');
 
 		return view('human_resources.training_filosofi.training_filos_index', array(
+			'tr_status' => $tr_status,
 			'tr_filos_question' => $tr_filos_question,
 			'tgl' => date('Y-m-d H:i:s'),
 			'check_emp_tr' => $check_emp_tr,
@@ -329,7 +330,7 @@ class HumanResourcesController extends Controller
 		));
 	}
 
-		public function inpuTrFilosofi(Request $request)
+	public function inpuTrFilosofi(Request $request)
 	{
 		try {
 			$employee_id = $request->get('employee_id');
@@ -368,84 +369,117 @@ class HumanResourcesController extends Controller
 		}
 	}
 
+	public function updateTrFilososiOpen(Request $request)
+	{
+		try {
+			$st = $request->get('status');
+
+
+			if($st == "open"){
+				$st_op = "1";
+			}else{
+				$st_op = "0";
+			}
+		
+			$st_training = TrFilosofiQuestion::where('deleted_at',null)->update(
+				[
+					'status' => $st_op
+				]
+			);
+
+			$response = array(
+				'status' => true,
+				'datas' => 'Berhasil diupdate'
+			);
+			return Response::json($response);
+			
+		} catch (\Exception $e) {
+			$response = array(
+				'status' => false,
+				'datas' => $e->getMessage()
+			);
+			return Response::json($response);
+		}
+	}
+
 
 	public function mcu(){
 		$activity = DB::table('user_activity_logs')->insert([
-            'category' => 'MCU',
-            'detail' => 'MCU',
-            'created_by' => Auth::id(),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
-        $title = 'Kuisioner Emergency';
-        $title_jp = '';
+			'category' => 'MCU',
+			'detail' => 'MCU',
+			'created_by' => Auth::id(),
+			'created_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s'),
+		]);
+		$title = 'Kuisioner Emergency';
+		$title_jp = '';
 
-        $date = date('Y-m-d');
+		$date = date('Y-m-d');
 
-        $empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and (end_date is null or end_date > "'.$date.'")');
+		$empsync = DB::select('select * from employee_syncs where employee_id = "'.Auth::user()->username.'" and (end_date is null or end_date > "'.$date.'")');
 
         // var_dump($empsync);die();
 
-        $empget = DB::select('select * from mcu_surveys where employee_id = "'.Auth::user()->username.'"');
+		$empget = DB::select('select * from mcu_surveys where employee_id = "'.Auth::user()->username.'"');
 
 
-        return view('mcu', array(
-            'title' => $title,
-            'title_jp' => $title_jp,
-            'empsync' => $empsync,
-            'empget' => $empget
-        ))->with('page', 'Kuisioner MCU');
-    }
+		return view('mcu', array(
+			'title' => $title,
+			'title_jp' => $title_jp,
+			'empsync' => $empsync,
+			'empget' => $empget
+		))->with('page', 'Kuisioner MCU');
+	}
 
-    public function postMcu(Request $request)
-    {
-        try {
-            $cek_input = db::select("select * from mcu_surveys where employee_id='".$request->get('employee_id')."'");
+	public function postMcu(Request $request)
+	{
+		try {
+			$cek_input = db::select("select * from mcu_surveys where employee_id='".$request->get('employee_id')."'");
 
-            if (count($cek_input) > 0) {
-                $response = array(
-                    'status' => false,
-                    'datas' => 'Anda Sudah Mengisi Form Survey Medical Check Up Ini'
-                );
-                return Response::json($response);
-            }
+			if (count($cek_input) > 0) {
+				$response = array(
+					'status' => false,
+					'datas' => 'Anda Sudah Mengisi Form Survey Medical Check Up Ini'
+				);
+				return Response::json($response);
+			}
 
-            else{
-                $forms = McuSurvey::create([
-                    'tanggal' => date('Y-m-d'),
-                    'employee_id' => $request->get('employee_id'),
-                    'name' => $request->get('name'),
-                    'department' => $request->get('department'),
-                    'jawaban' => $request->get('jawaban')
-                ]);
+			else{
+				$forms = McuSurvey::create([
+					'tanggal' => date('Y-m-d'),
+					'employee_id' => $request->get('employee_id'),
+					'name' => $request->get('name'),
+					'department' => $request->get('department'),
+					'jawaban' => $request->get('jawaban')
+				]);
 
-                $forms->save();
+				$forms->save();
 
-                $response = array(
-                    'status' => true,
-                    'datas' => 'Berhasil Input Data',
-                );
-                return Response::json($response);
-            }
+				$response = array(
+					'status' => true,
+					'datas' => 'Berhasil Input Data',
+				);
+				return Response::json($response);
+			}
 
 
-        } catch (QueryException $e){
-            $error_code = $e->errorInfo[1];
-            if($error_code == 1062){
-                $response = array(
-                    'status' => false,
-                    'datas' => 'Anda Sudah Mengisi Form Survey Medical Check Up Ini'
-                );
-                return Response::json($response);
-            }
-            else{
-                $response = array(
-                    'status' => false,
-                    'datas' => $e->getMessage()
-                );
-                return Response::json($response);
-            }
-        }
-    }
+		} catch (QueryException $e){
+			$error_code = $e->errorInfo[1];
+			if($error_code == 1062){
+				$response = array(
+					'status' => false,
+					'datas' => 'Anda Sudah Mengisi Form Survey Medical Check Up Ini'
+				);
+				return Response::json($response);
+			}
+			else{
+				$response = array(
+					'status' => false,
+					'datas' => $e->getMessage()
+				);
+				return Response::json($response);
+			}
+		}
+	}
 
 }
