@@ -58,13 +58,13 @@
                         <!-- <span>Post Test Mengenai Pemahaman COC (Code Of Conduct)</span> -->
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
+                <!-- <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
                     <a href="{{ url('index/survey_stocktaking') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/dashboard/stocktaking.png')}}" alt="" height="50"></i>
-                        <strong style="font-size:12px">Survey <br>Stocktaking</strong>
+                        <strong style="font-size:12px">Survey <br>Stocktaking</strong> -->
                         <!-- <span>Seberapa Mengerti Anda Mengenai Stocktaking di YMPI</span> -->
-                    </a>
-                </div>
+                    <!-- </a>
+                </div> -->
                 <div class="col-lg-3 col-md-3 col-sm-4 col-4" style="padding-left: 5px;padding-right: 6px;">
                     <a href="{{ url('training_filosofi') }}"  class="mini-box"  style="margin-bottom:20px">
                         <i><img src="{{ asset('images/filosofi_n.png')}}" alt="" height="50"></i>
