@@ -47,12 +47,12 @@
                                 <i class="fa fa-book"></i> Kode Etik
                             </a>
                         </li>
-                        <li style="background-color:#fff">
+                       <!--  <li style="background-color:#fff">
                             <a href="{{ url('index/survey_stocktaking') }}" 
                                 @if(isset($page) && $page == "Survey Stocktaking") class="active" @endif>
                                 <i class="fa fa-users"></i> Survey Stocktaking
                             </a>
-                        </li>
+                        </li> -->
                         <!-- <li style="background-color:#fff">
                            <a href="{{ url('emergency') }}" 
                                 @if(isset($page) && $page == "Kuisioner Emergency") class="active" @endif>
