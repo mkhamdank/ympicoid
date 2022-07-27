@@ -65,11 +65,11 @@
                                 <i class="fa fa-plus"></i> Hasil MCU
                             </a>
                         </li> -->
-                        <li style="background-color:#fff">
+                     <!--    <li style="background-color:#fff">
                             <a href="{{ url('training_filosofi') }}" @if(isset($page) && $page == "Kode Etik") class="active" @endif>
                                 <i class="fa fa-book"></i> Training Filosofi Yamaha
                             </a>
-                        </li>
+                        </li> -->
                         <li style="padding-left:0px">
                             <a class="btn btn-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color:white;line-height: 30px;"><i class="fa fa-sign-out"></i> Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
